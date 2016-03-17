@@ -1,2 +1,2 @@
 # JamaisVu
-Neural network
+Neural network (fo realz)
