@@ -5,6 +5,6 @@ using namespace std;
 
 int main() {
     cout << "fagitz" << endl;
-    CS_DROPSHADOW;
+    cout << CS_DROPSHADOW << endl;
     return 0;
 }
