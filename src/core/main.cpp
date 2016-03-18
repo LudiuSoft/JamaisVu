@@ -5,6 +5,6 @@ using namespace std;
 
 int main() {
     sf::Vector2f lol;
-    cout << "fagit" << endl;
+    cout << "fagitlol" << endl;
     return 0;
 }
