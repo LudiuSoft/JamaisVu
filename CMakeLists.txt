@@ -11,8 +11,8 @@ add_executable(JamaisVu ${SOURCE_FILES})
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
 ##QT
-find_package(Qt 7 REQUIRED)
-if(QT5_FOUND)
+find_package(Qt 4 REQUIRED)
+if(QT_FOUND)
     include_directories(${QT_INCLUDES})
     target_link_libraries(JamaisVu ${QT_LIBRARIES})
 endif()
