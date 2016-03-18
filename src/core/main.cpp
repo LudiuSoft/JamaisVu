@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    cout << "fagitz" << endl;
-    cout << CS_DROPSHADOW << endl;
+    cout << "fagit" << endl;
+    CS_DROPSHADOW;
     return 0;
 }
