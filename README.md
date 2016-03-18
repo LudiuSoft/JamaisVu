@@ -1,2 +1,2 @@
 # JamaisVu
-Neural network lmaooo
+Neural network
