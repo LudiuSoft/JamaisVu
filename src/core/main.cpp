@@ -1,10 +1,11 @@
 #include <iostream>
-#include <qt_windows.h>
+#include "wx/wx.h"
 
 using namespace std;
 
 int main() {
-    cout << "fagit" << endl;
-    CS_DROPSHADOW;
+    wxApp app;
+    app.CheckSignal();
+    cout << "fagot" << endl;
     return 0;
 }
