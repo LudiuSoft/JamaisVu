@@ -4,7 +4,7 @@ project(JamaisVu)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 
 set(SOURCE_FILES src/core/main.cpp)
-add_executable(JamaisVu ${SOURCE_FILES} src/core/network/generation/species/genome/Genome.cpp src/core/network/generation/species/genome/Genome.h src/core/network/generation/species/Species.cpp src/core/network/generation/species/Species.h src/core/network/generation/Generation.cpp src/core/network/generation/Generation.h)
+add_executable(JamaisVu ${SOURCE_FILES} src/core/network/Genome.cpp src/core/network/Genome.h src/core/network/Species.cpp src/core/network/Species.h src/core/network/Generation.cpp src/core/network/Generation.h)
 
 #LIBS
 
