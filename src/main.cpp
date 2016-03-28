@@ -1,9 +1,6 @@
 #include <iostream>
-#include "wx/wx.h"
-
-using namespace std;
 
 int main() {
-    cout << "fagit" << endl;
+    std::cout << "fagit" << std::endl;
     return 0;
 }
