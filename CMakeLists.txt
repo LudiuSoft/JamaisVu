@@ -3,7 +3,7 @@ project(JamaisVu)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -I${wxWidgets_INCLUDE_DIRS}  -DWXUSINGDLL -D__WXGTK__")
 
-set(SOURCE_FILES src/core/main.cpp)
+set(SOURCE_FILES src/main.cpp)
 add_executable(JamaisVu ${SOURCE_FILES})
 
 #LIBS
