@@ -5,9 +5,11 @@
 #ifndef JAMAISVU_SPECIES_H
 #define JAMAISVU_SPECIES_H
 
+#include "Genome.h"
 
-class species {
-
+class Species {
+    Genome genome;
+    int fitness;
 };
 
 

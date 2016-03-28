@@ -6,7 +6,8 @@
 #define JAMAISVU_GENOME_H
 
 
-class genome {
+
+class Genome {
 
 };
 
