@@ -12,26 +12,11 @@ Species::Species(std::string _name)
 double Species::getAverageFitness()
 {
     int totalFitness = 0;
-
-    /* TODO
-     * LINE a1:
-     *
-     * In java, size() would return the amount of elements. If that's the case, we'd have a
-     * random memory access at the LINE a2 when it reaches the point beyond the last element,
-     * because of the <= operator in a1. Change it to < if I'm right, I didn't do it since I'm unsure...
-     *
-     * EXAMPLE: Vector ( 0, 1, 2 ) has 3 elements
-     * size() = 3;              This line is what I'm unsure about
-     * i=0 <= size() : true
-     * i=1 <= size() : true
-     * i=2 <= size() : true
-     * i=3 <= size() : TRUE     (should be false, will return random memory)
-     */
-
-    for (Genome& genome : genomes)    // a1
+    for (Genome& genome : genomes)
     {
-        totalFitness += genome.fitness;          // a2
+        totalFitness += genome.fitness;
     }
+
     return totalFitness/genomes.size();
 }
 
