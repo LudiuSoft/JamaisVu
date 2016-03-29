@@ -6,10 +6,18 @@
 #define JAMAISVU_SPECIES_H
 
 #include "Genome.h"
+#include <iostream>
 
 class Species {
-    Genome genome;
-    int fitness;
+public:
+    Species(std::string _name);
+
+    std::string name;
+    std::vector<Genome> genomes;
+
+    double getAverageFitness();
+    void setName(std::string _name);
+    const std::string& getName() const;
 
 };
 

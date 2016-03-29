@@ -9,7 +9,9 @@
 #include <vector>
 
 class Genome {
+public:
     std::vector<Gene> genes;
+    int fitness;
 };
 
 
