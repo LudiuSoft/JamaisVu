@@ -1,0 +1,38 @@
+Alright, let's get started... (Patrick Hein, 29.03.2016)
+
+
+NETWORK
+
+The network class will be a container and more a less the internal API of the whole thing. The network in its being is
+not really important, but what it contains is. The network will contain a Generation container.
+
+To get smarter over time, the Generation container will get talked to by the network, the network container will also
+be the manager for mutation chances, strength, etc.
+
+FUTURE PLANS: The network could have a container with general gene improvement ideas which some mutations take examples from,
+which could increase learning speed drastically. Each gene in this container would be a small module, replacing a certain mutation.
+
+
+GENERATION
+
+A generation is also only a container, but this time for Species. The given mutation value to a generation will be shared to all
+its species after the end of a generation. After a generation ended, it'll carry its best results to the next generation, and
+the very best even get multiplied so the number of species stays consistent.
+
+
+SPECIES
+
+Species will contain both Neurons, but also Genomes. Given mutation values will be spread randomly to its genomes and neurons.
+(There will be neuron and genome mutation values, differentiated from each other)
+
+
+NEURON
+
+A neuron itself isn't as important as its connections, the genomes. However, a neuron can reject certain connections or
+send them signals to decrease or increase their weight.
+
+
+GENOME
+
+A genome will be the connection between a neuron. They are the key to the network. They need to be changable and can mutate in
+the aspect of its connection points, weight etc.
