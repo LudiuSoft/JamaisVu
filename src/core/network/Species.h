@@ -10,6 +10,7 @@
 class Species {
     Genome genome;
     int fitness;
+
 };
 
 

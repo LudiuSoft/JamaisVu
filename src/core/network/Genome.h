@@ -5,10 +5,11 @@
 #ifndef JAMAISVU_GENOME_H
 #define JAMAISVU_GENOME_H
 
-
+#include "Gene.h"
+#include <vector>
 
 class Genome {
-
+    std::vector<Gene> genes;
 };
 
 

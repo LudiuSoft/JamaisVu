@@ -11,7 +11,7 @@
 class Generation {
     int topFitness;
     std::vector<Species> species;
-    
+
 };
 
 
