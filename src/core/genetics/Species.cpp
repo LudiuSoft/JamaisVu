@@ -28,9 +28,9 @@ double Species::getAverageFitness()
      * i=3 <= size() : TRUE     (should be false, will return random memory)
      */
 
-    for (unsigned int i = 0; i<=genomes.size(); i++)    // a1
+    for (auto it = genomes.begin(); it != genomes.end(); it++)    // a1
     {
-        totalFitness += genomes.at(i).fitness;          // a2
+        totalFitness += it->fitness;          // a2
     }
     return totalFitness/genomes.size();
 }
