@@ -3,8 +3,12 @@ project(JamaisVu)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 
-set(SOURCE_FILES src/core/main.cpp src/core/network/Neuron.cpp src/core/network/Neuron.h)
-add_executable(JamaisVu ${SOURCE_FILES} src/core/genetics/Gene.cpp src/core/genetics/Gene.h src/core/genetics/Genome.cpp src/core/genetics/Genome.h src/core/genetics/Species.cpp src/core/genetics/Species.h src/core/genetics/Generation.cpp src/core/genetics/Generation.h)
+set(SOURCE_FILES src/core/main.cpp src/core/genetics/Gene.cpp src/core/genetics/Gene.h src/core/genetics/Genome.cpp
+    src/core/genetics/Genome.h src/core/genetics/Species.cpp src/core/genetics/Species.h
+    src/core/genetics/Generation.cpp src/core/genetics/Generation.h src/core/network/Network.cpp
+    src/core/network/Network.h)
+
+add_executable(JamaisVu ${SOURCE_FILES})
 
 #LIBS
 
