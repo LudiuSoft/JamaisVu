@@ -16,6 +16,7 @@ double Species::getAverageFitness()
     {
         totalFitness += genome.fitness;
     }
+
     return totalFitness/genomes.size();
 }
 
