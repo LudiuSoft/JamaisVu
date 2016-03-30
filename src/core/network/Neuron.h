@@ -7,7 +7,9 @@
 
 
 class Neuron {
-
+private:
+public:
+    Neuron();
 };
 
 

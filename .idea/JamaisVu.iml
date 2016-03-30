@@ -8,11 +8,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Species.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Species.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Generation.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Genome.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Gene.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Generation.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Gene.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Genome.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

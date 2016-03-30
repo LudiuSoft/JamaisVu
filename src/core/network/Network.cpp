@@ -3,3 +3,7 @@
 //
 
 #include "Network.h"
+
+Network::Network(Generation initGen) {
+    this->currentGeneration = initGen;
+}
