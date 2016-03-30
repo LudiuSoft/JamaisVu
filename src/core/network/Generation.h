@@ -13,6 +13,7 @@ private:
     std::vector<Species> species;
     int mutation;
 public:
+    Generation() {};                    //Default ctor
     Generation(int speciesAmount);      // Simple initiator for Network
     Generation(std::vector<Species>);   // Used for "nextGeneration" function
 

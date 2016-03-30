@@ -9,7 +9,7 @@
 class Neuron {
 private:
 public:
-    Neuron();
+    Neuron() {}; // Adding to chars is even better than implementing in src file.
 };
 
 
