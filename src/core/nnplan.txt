@@ -22,17 +22,17 @@ the very best even get multiplied so the number of species stays consistent.
 
 SPECIES
 
-Species will contain both Neurons, but also Genomes. Given mutation values will be spread randomly to its genomes and neurons.
-(There will be neuron and genome mutation values, differentiated from each other)
+Species will contain both Neurons, but also Genes. Given mutation values will be spread randomly to its genes and neurons.
+(There will be neuron and gene mutation values, differentiated from each other)
 
 
 NEURON
 
-A neuron itself isn't as important as its connections, the genomes. However, a neuron can reject certain connections or
+A neuron itself isn't as important as its connections, the genes. However, a neuron can reject certain connections or
 send them signals to decrease or increase their weight.
 
 
-GENOME
+GENE
 
-A genome will be the connection between a neuron. They are the key to the network. They need to be changable and can mutate in
+A gene will be the connection between a neuron. They are the key to the network. They need to be changable and can mutate in
 the aspect of its connection points, weight etc.
