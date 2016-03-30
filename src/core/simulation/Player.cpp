@@ -12,6 +12,8 @@ Player::Player()
     this->hunger=0;
     this->waterCount=0;
     this->alive=true;
+
+    static int lol;
 }
 
 void Player::forage()

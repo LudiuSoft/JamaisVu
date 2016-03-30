@@ -14,7 +14,7 @@ private:
     int mutation;
 public:
     Generation() {};                    //Default ctor
-    Generation(int speciesAmount);      // Simple initiator for Network
+    Generation(int speciesAmount);      // Simple ctor for Network
     Generation(std::vector<Species>);   // Used for "nextGeneration" function
 
     Generation nextGeneration();        // Creates follow-up generation

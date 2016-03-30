@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
-project(JamaisVu)
+project(JamaisVu CXX)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
 
 set(SOURCE_FILES src/core/main.cpp src/core/network/Gene.cpp src/core/network/Gene.h
                  src/core/network/Species.cpp src/core/network/Species.h
@@ -10,6 +10,8 @@ set(SOURCE_FILES src/core/main.cpp src/core/network/Gene.cpp src/core/network/Ge
                  src/core/simulation/Player.cpp src/core/simulation/Player.h)
 
 add_executable(JamaisVu ${SOURCE_FILES})
+
+find_package(Threads REQUIRED)
 
 #LIBS
 

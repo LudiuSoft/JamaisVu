@@ -17,10 +17,12 @@ class Player {
     int foodCount;
     int waterCount;
 
+    void updateStats(int deltaTime);
     void forage();
     void drink();
     void eat();
     void sleep();
+    void doNothing();
 };
 
 
