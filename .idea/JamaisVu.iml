@@ -5,6 +5,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src/core/network/Network.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/network/Network.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Player.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Simulation.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Simulation.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Player.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Species.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Species.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/genetics/Generation.h" isTestSource="false" />
