@@ -7,10 +7,28 @@
 
 Simulation::Simulation()
 {
-    t1 = std::thread(Simulation::loop);
+    this->start();
+}
+
+Simulation::~Simulation()
+{
+    this->end();
+}
+
+void Simulation::start()
+{
+    this->thread = std::thread(Simulation::loop);
+}
+
+void Simulation::end()
+{
+    this->thread.join();
 }
 
 void Simulation::loop()
 {
     std::cout << "lol\n";
 }
+
+
+

@@ -5,20 +5,26 @@
 #ifndef JAMAISVU_PLAYER_H
 #define JAMAISVU_PLAYER_H
 
+#include <random>
+#include <functional>
+#include <iostream>
 
 
 class Player {
+public:
     Player();
 
     bool alive;
     float hunger;
     float thirst;
     float exhaustion;
-    int foodCount;
-    int waterCount;
+    unsigned int foodCount;
+    unsigned int waterCount;
+    std::mt19937 rnd;
+
 
     void updateStats(int deltaTime);
-    void forage();
+    void forage(double findFoodProbability, double findWaterProbability); //TODO in src file Player.cpp
     void drink();
     void eat();
     void sleep();
