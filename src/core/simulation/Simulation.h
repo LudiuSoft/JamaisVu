@@ -8,11 +8,11 @@
 #include <thread>
 #include "Player.h"
 
-enum SimulationDifficulty {test, noob, easy, medium, hard, insane};
+enum SimulationDifficulty {noob, easy, medium, hard, insane};
 
 class Simulation {
 public:
-    Simulation();
+    Simulation(SimulationDifficulty difficulty);
     ~Simulation();
 
     bool paused;
