@@ -5,19 +5,19 @@
 #ifndef JAMAISVU_SPECIES_H
 #define JAMAISVU_SPECIES_H
 
+#include "Genome.h"
 #include "Gene.h"
 #include "Neuron.h"
-#include <iostream>
+#include <vector>
 
 class Species {
 private:
-    std::vector<Gene> genes;
-    std::vector<Neuron> d;
+    std::vector<Genome> genomes;
 public:
     Species();
 
-
-    double getAverageFitness();
+    std::vector<Gene> getBestGenes(int amount);
+    std::vector<Gene> getBestGenes(double percentage);
 };
 
 

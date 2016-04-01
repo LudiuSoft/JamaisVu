@@ -5,11 +5,19 @@
 #ifndef JAMAISVU_GENOME_H
 #define JAMAISVU_GENOME_H
 
-#include <vector>
+#include "Neuron.h"
 
 class Gene {
+private:
+    double fitness;
+/*
+    Neuron& input;
+    Neuron& output;*/
+
+    bool invert;
+    double weight;
 public:
-    int fitness;
+    Gene();
 };
 
 

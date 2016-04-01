@@ -3,3 +3,10 @@
 //
 
 #include "Gene.h"
+
+Gene::Gene()
+{
+    fitness = 20;
+    invert = true;
+    weight = 0.7;
+}
