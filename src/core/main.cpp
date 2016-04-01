@@ -29,7 +29,7 @@ int main()
     //t1.join();
     std::vector<int> options (3,0);
     testVLA(options);
-    char blue[] = { 0x1b, '[', '0', ';', '3', '4', 'm', 0 };
+    char blue[] = { 0x1b, '[', '0', ';', '3', '4', ';', '4', '2', 'm', 0 };
     char normal[] = { 0x1b, '[', '0', ';', '3', '9', 'm', 0 };
 
     std::cout << blue << "lol" << normal << std::endl;
