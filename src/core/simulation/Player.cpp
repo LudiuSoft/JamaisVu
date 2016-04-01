@@ -4,9 +4,6 @@
 
 #include "Player.h"
 #include "Simulation.h"
-#include <random>
-#include <iostream>
-#include <functional>
 
 Player::Player()
 {

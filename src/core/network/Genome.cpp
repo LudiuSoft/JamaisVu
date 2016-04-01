@@ -6,5 +6,5 @@
 
 Genome::Genome()
 {
-    f.push_back(true);
+    
 }

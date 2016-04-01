@@ -8,10 +8,11 @@ set(SOURCE_FILES src/core/main.cpp
                  src/core/network/Species.cpp src/core/network/Species.h
                  src/core/network/Genome.cpp src/core/network/Genome.h
                  src/core/network/Gene.cpp src/core/network/Gene.h
+                 src/core/network/Neuron.h src/core/network/Neuron.cpp
                  src/core/simulation/Simulation.cpp src/core/simulation/Simulation.h
                  src/core/simulation/Player.cpp src/core/simulation/Player.h)
 
-add_executable(JamaisVu ${SOURCE_FILES} src/core/network/Genome.cpp src/core/network/Genome.h)
+add_executable(JamaisVu ${SOURCE_FILES})
 
 find_package(Threads REQUIRED)
 

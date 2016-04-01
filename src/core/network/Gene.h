@@ -2,8 +2,8 @@
 // Created by IPat (Local) on 28.03.2016.
 //
 
-#ifndef JAMAISVU_GENOME_H
-#define JAMAISVU_GENOME_H
+#ifndef JAMAISVU_GENE_H
+#define JAMAISVU_GENE_H
 
 #include "Neuron.h"
 
@@ -21,4 +21,4 @@ public:
 };
 
 
-#endif //JAMAISVU_GENOME_H
+#endif //JAMAISVU_GENE_H

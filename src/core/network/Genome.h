@@ -5,8 +5,8 @@
 #ifndef JAMAISVU_GENOME_H
 #define JAMAISVU_GENOME_H
 
-#include "Gene.h"
 #include <vector>
+#include "Gene.h"
 
 class Genome {
 private:
