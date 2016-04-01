@@ -2,6 +2,7 @@
 
 #include "network/Species.h"
 #include "simulation/Simulation.h"
+#include <vector>
 
 void testFunc()
 {
@@ -14,10 +15,25 @@ void testFunc()
     }
 }
 
+void testVLA (std::vector<int> options)
+{
+    for (int lol : options)
+    {
+        std::cout << lol << std::endl;
+    }
+}
+
 int main()
 {
-    std::thread t1 (testFunc);
-    t1.join();
-    std::cout << "Success!" << std::endl;
+    //std::thread t1 (testFunc);
+    //t1.join();
+    std::vector<int> options (3,0);
+    testVLA(options);
+    char blue[] = { 0x1b, '[', '0', ';', '3', '4', 'm', 0 };
+    char normal[] = { 0x1b, '[', '0', ';', '3', '9', 'm', 0 };
+
+    std::cout << blue << "lol" << normal << std::endl;
+
+
     return 0;
 }

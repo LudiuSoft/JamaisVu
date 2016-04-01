@@ -6,5 +6,5 @@
 
 Genome::Genome()
 {
-    
+
 }
