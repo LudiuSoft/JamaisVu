@@ -15,7 +15,7 @@ private:
 public:
     Genome() {};
 
-    void mutate(unsigned double mutation);
+    void mutate(double mutation);
 };
 
 

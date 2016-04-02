@@ -4,6 +4,6 @@
 
 #include "Genome.h"
 
-void Genome::mutate(unsigned double mutation) {
+void Genome::mutate(double mutation) {
 
 }

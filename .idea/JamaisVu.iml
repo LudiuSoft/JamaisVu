@@ -14,7 +14,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/core/network/Genome.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/cli/Console.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/cli/Console.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/core/cli/AnsiTextOptions.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/cli/AnsiText.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Player.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Simulation.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Simulation.h" isTestSource="false" />

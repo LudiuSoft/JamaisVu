@@ -6,9 +6,12 @@
 #define JAMAISVU_CONSOLE_H
 
 #include <iostream>
+#include "AnsiText.h"
 
 class Console {
-    void print(std::string text, int options []);
+public:
+    void print(std::string text, std::initializer_list<AnsiTextOption> options);
+    void print(std::string text);
 };
 
 

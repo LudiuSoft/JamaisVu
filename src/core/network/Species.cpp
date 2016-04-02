@@ -25,7 +25,7 @@ void Species::setGenomeLimit(unsigned int limit)
     this->maxGenomes = limit;
 }
 
-void Species::evolve(unsigned double mutation) {
+void Species::evolve(double mutation) {
     for (Genome genome : genomes)
     {
         genome.mutate(mutation);

@@ -19,7 +19,7 @@ Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecie
     }
 }
 
-void Generation::evolve(unsigned double mutation)
+void Generation::evolve(double mutation)
 {
     for (Species uniqueSpecies : species)
     {
