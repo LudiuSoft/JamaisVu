@@ -2,8 +2,7 @@
 
 #include "network/Species.h"
 #include "simulation/Simulation.h"
-#include "cli/Console.h"
-#include "util/toStr.h"
+#include "tui/Console.h"
 
 void testFunc()
 {
@@ -22,12 +21,7 @@ int main()
     //t1.join();
     Console console;
 
-    console.print("lol ", {fg_black, bg_green});
-    console.print("we ", {bold, fg_red, bg_cyan});
-    console.print("did ", {underlined, bold, fg_lightblue, bg_black});
-    console.print("it!", {dim, inverted, bold, underlined, fg_cyan, bg_darkgray});
-    std::cout << std::endl;
-    std::cout << toStr(5);
+    std::cout << "\u0580";
 
     return 0;
 }

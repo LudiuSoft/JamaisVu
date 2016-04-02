@@ -3,8 +3,6 @@
 //
 
 #include "Console.h"
-#include <string>
-
 
 void Console::print(std::string text, std::initializer_list<AnsiTextOption> options)
 {

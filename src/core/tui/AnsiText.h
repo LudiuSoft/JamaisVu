@@ -61,6 +61,4 @@ enum AnsiTextOption
     bg_white        = 107,
 };
 
-const char ANSIESCAPECHAR = 0x1b;
-
 #endif //JAMAISVU_ANSITEXT_H

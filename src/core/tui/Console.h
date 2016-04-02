@@ -7,12 +7,15 @@
 
 #include <iostream>
 #include "AnsiText.h"
-#include <sstream>
+#include "../util/Vector2.h"
 
 class Console {
 public:
     void print(std::string text, std::initializer_list<AnsiTextOption> options);
     void print(std::string text);
+    Vector2<int> getNativeConsoleSize();
+
+    Vector2<int> consoleSize;
 };
 
 
