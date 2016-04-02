@@ -12,10 +12,9 @@ void Console::print(std::string text, std::initializer_list<AnsiTextOption> opti
     std::string ansiResetString = "\033[0;39;49m";
     for (AnsiTextOption option : options)
     {
-        ansiSetString += std::to_string(option);
         ansiSetString += ";";
+        ansiSetString += std::to_string(option);
     }
-    ansiSetString.pop_back(); //Remove last semicolon, would interfere with ANSI
     ansiSetString += "m";
 
     std::cout << ansiSetString << text << ansiResetString;

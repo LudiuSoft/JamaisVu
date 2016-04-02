@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "AnsiText.h"
+#include <sstream>
 
 class Console {
 public:
