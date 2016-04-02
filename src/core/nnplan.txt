@@ -22,8 +22,13 @@ the very best even get multiplied so the number of species stays consistent.
 
 SPECIES
 
-Species will contain both Neurons, but also Genes. Given mutation values will be spread randomly to its genes and neurons.
-(There will be neuron and gene mutation values, differentiated from each other)
+Species will contains Genomes. That way, each Generation runs multiple approaches to a solution.
+
+
+GENOMES
+
+Genomes will contain both Neurons, but also Genes. Given mutation values will be spread randomly to its genes and neurons.
+(There will be neuron and gene mutation values, differentiated from each other).
 
 
 NEURON

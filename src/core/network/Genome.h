@@ -10,11 +10,12 @@
 
 class Genome {
 private:
-    std::vector<Gene> f;
+    std::vector<Gene> genes;
+    std::vector<Neuron> neurons;
 public:
-    Genome();
+    Genome() {};
 
-    int placeholder;
+    void mutate(unsigned double mutation);
 };
 
 

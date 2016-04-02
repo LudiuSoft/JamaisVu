@@ -4,27 +4,41 @@
 
 #include "Generation.h"
 
-Generation::Generation(int speciesAmount)
+Generation::Generation() {
+
+}
+
+Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecies)
 {
     if (species.size()!=0)
         species = std::vector<Species>();
-    while (speciesAmount!=0)
+    while (speciesPerGen !=0)
     {
-        species.push_back(Species());
-        speciesAmount--;
+        species.push_back(Species(genomesPerSpecies));
+        speciesPerGen--;
     }
 }
 
-Generation::Generation(std::vector<Species> species)
+void Generation::evolve(unsigned double mutation)
 {
-    this->species = species;
+    for (Species uniqueSpecies : species)
+    {
+        uniqueSpecies.evolve(mutation);
+    }
 }
 
-Generation Generation::nextGeneration() {
-    return Generation();
+void Generation::setInputNeurons(std::vector<Neuron> &input) {
+    inputNeurons = input;
 }
 
-void Generation::setMutation(int mutation)
-{
-    this->mutation = mutation;
+void Generation::setOutputNeurons(std::vector<Neuron> &output) {
+    outputNeurons = output;
+}
+
+std::vector<Neuron> Generation::getInputNeurons() {
+    return inputNeurons;
+}
+
+std::vector<Neuron> Generation::getOutputNeurons() {
+    return outputNeurons;
 }

@@ -11,15 +11,22 @@
 class Generation {
 private:
     std::vector<Species> species;
-    int mutation;
+
+    std::vector<Neuron> emptyNeuronVector;
+
+    std::vector<Neuron>& inputNeurons = emptyNeuronVector;
+    std::vector<Neuron>& outputNeurons = emptyNeuronVector;
 public:
-    Generation() {};                    // Default ctor
-    Generation(int speciesAmount);      // Simple ctor for Network
-    Generation(std::vector<Species>);   // Used for "nextGeneration" function
+    Generation();
+    Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecies);     // Constructor for outer calls
 
-    Generation nextGeneration();        // Creates follow-up generation
+    void setInputNeurons(std::vector<Neuron>& input);
+    void setOutputNeurons(std::vector<Neuron>& output);
 
-    void setMutation(int);              // Redefines mutation value
+    std::vector<Neuron> getInputNeurons();
+    std::vector<Neuron> getOutputNeurons();
+
+    void evolve(unsigned double mutation);
 };
 
 
