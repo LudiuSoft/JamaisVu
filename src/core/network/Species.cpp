@@ -3,20 +3,21 @@
 //
 
 #include "Species.h"
+#include <algorithm>
 
-Species::Species(unsigned int limit)
+Species::Species(unsigned int limit, Generation* originalGeneration)
 {
     setGenomeLimit(limit);
     while (limit!=0)
     {
-        genomes.push_back(Genome());
+        genomes.push_back(Genome(originalGeneration));
         limit--;
     }
 }
 
 Species::Species(std::vector<Genome> genomes)
 {
-    setGenomeLimit(genomes.size());
+    setGenomeLimit((unsigned int)genomes.size());
     this->genomes = genomes;
 }
 
@@ -25,14 +26,23 @@ void Species::setGenomeLimit(unsigned int limit)
     this->maxGenomes = limit;
 }
 
-void Species::evolve(double mutation) {
+void Species::evolve(double addRemoveMutation, double geneWeightMutation) {
     for (Genome genome : genomes)
     {
-        genome.mutate(mutation);
+        genome.mutate(addRemoveMutation, geneWeightMutation);
     }
 }
 
-std::vector<Genome> Species::getBestGenomes(double percentage) { }
+std::vector<Genome> Species::getBestGenomes(double percentage)
+{
+    return getBestGenomes((unsigned int)(genomes.size()*percentage));
+}
 
-std::vector<Genome> Species::getBestGenomes(int amount) { }
+std::vector<Genome> Species::getBestGenomes(unsigned int amount)
+{
+    std::vector<Genome> genomesCopy = genomes;
+    std::sort(genomesCopy.begin(), genomesCopy.end(), std::greater<Genome>());    // Sorts descending dependent from fitness
+    genomesCopy.resize(amount);
+    return genomesCopy;
+}
 

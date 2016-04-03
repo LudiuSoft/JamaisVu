@@ -14,16 +14,16 @@ Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecie
         species = std::vector<Species>();
     while (speciesPerGen !=0)
     {
-        species.push_back(Species(genomesPerSpecies));
+        species.push_back(Species(genomesPerSpecies, this));
         speciesPerGen--;
     }
 }
 
-void Generation::evolve(double mutation)
+void Generation::evolve(double addRemoveMutation, double geneWeightMutation)
 {
     for (Species uniqueSpecies : species)
     {
-        uniqueSpecies.evolve(mutation);
+        uniqueSpecies.evolve(addRemoveMutation, geneWeightMutation);
     }
 }
 

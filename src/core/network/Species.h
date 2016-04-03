@@ -16,15 +16,15 @@ private:
     unsigned int maxGenomes;
 public:
     Species() {};
-    Species(unsigned int limit);
+    Species(unsigned int limit, Generation* originalGeneration);
     Species(std::vector<Genome> genomes);
 
     void setGenomeLimit(unsigned int limit);
 
-    std::vector<Genome> getBestGenomes(int amount);
+    std::vector<Genome> getBestGenomes(unsigned int amount);
     std::vector<Genome> getBestGenomes(double percentage);
 
-    void evolve(double mutation);
+    void evolve(double addRemoveMutation, double geneWeightMutation);
 };
 
 

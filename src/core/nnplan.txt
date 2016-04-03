@@ -33,8 +33,8 @@ Genomes will contain both Neurons, but also Genes. Given mutation values will be
 
 NEURON
 
-A neuron itself isn't as important as its connections, the genes. However, a neuron can reject certain connections or
-send them signals to decrease or increase their weight.
+A neuron itself isn't as important as its connections, the genes. Earlier, it was planned that neurons themselves have mutation too,
+but since they don't have many mutatable features, that is not neccessary. That work should be shared to the genes.
 
 
 GENE

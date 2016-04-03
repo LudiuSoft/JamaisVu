@@ -7,15 +7,27 @@
 
 #include <vector>
 #include "Gene.h"
+#include <stdlib.h>
+#include <random>
+#include <time.h>
+
+// TODO: I think this causes the compiler error...
+#include "Generation.h"
 
 class Genome {
 private:
     std::vector<Gene> genes;
     std::vector<Neuron> neurons;
+
+    Generation* originalGeneration;
 public:
     Genome() {};
+    Genome(Generation* originalGeneration);
 
-    void mutate(double mutation);
+    int fitness;
+    void mutate(double addRemoveMutation, double geneWeightMutation);
+
+    bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
 };
 
 

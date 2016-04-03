@@ -26,7 +26,7 @@ public:
     std::vector<Neuron> getInputNeurons();
     std::vector<Neuron> getOutputNeurons();
 
-    void evolve(double mutation);
+    void evolve(double addRemoveMutation, double geneWeightMutation);
 };
 
 
