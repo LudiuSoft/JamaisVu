@@ -11,18 +11,16 @@
 #include <random>
 #include <time.h>
 
-// TODO: I think this causes the compiler error...
-#include "Generation.h"
-
 class Genome {
 private:
     std::vector<Gene> genes;
     std::vector<Neuron> neurons;
 
-    Generation* originalGeneration;
+    std::vector<Neuron> (*getInputNeurons)();
+    std::vector<Neuron> (*getOutputNeurons)();
 public:
     Genome() {};
-    Genome(Generation* originalGeneration);
+    Genome(std::vector<Neuron> (&)(), std::vector<Neuron> (&)());
 
     int fitness;
     void mutate(double addRemoveMutation, double geneWeightMutation);

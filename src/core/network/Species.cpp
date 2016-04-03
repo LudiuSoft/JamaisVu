@@ -5,12 +5,12 @@
 #include "Species.h"
 #include <algorithm>
 
-Species::Species(unsigned int limit, Generation* originalGeneration)
+Species::Species(unsigned int limit, std::vector<Neuron> (&getInputNeurons)(), std::vector<Neuron> (&getOutputNeurons)())
 {
     setGenomeLimit(limit);
     while (limit!=0)
     {
-        genomes.push_back(Genome(originalGeneration));
+        genomes.push_back(Genome(getInputNeurons, getOutputNeurons));
         limit--;
     }
 }

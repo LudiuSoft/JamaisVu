@@ -4,13 +4,9 @@
 
 #include "Genome.h"
 
-Genome::Genome()
-{
-
-}
-
-Genome::Genome(Generation* originalGeneration) {
-    this->originalGeneration = originalGeneration;
+Genome::Genome(std::vector<Neuron> (&getInputNeurons)(), std::vector<Neuron> (&getOutputNeurons)()) {
+    this->getInputNeurons = getInputNeurons;
+    this->getOutputNeurons = getOutputNeurons;
 }
 
 // For addRemoveMutation, the range is 0 - 5 (Recommended is 1 - 2)
@@ -35,8 +31,6 @@ void Genome::mutate(double addRemoveMutation, double geneWeightMutation) {
     // Create new neurons or genes
     const double createNeuronProb = addRemoveMutation*5/100;
     const double createGeneProb = addRemoveMutation*20/100;
-
-    originalGeneration->getInputNeurons();
 
     // Modify gene weights
 

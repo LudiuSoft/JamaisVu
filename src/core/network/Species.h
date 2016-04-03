@@ -16,7 +16,7 @@ private:
     unsigned int maxGenomes;
 public:
     Species() {};
-    Species(unsigned int limit, Generation* originalGeneration);
+    Species(unsigned int limit, std::vector<Neuron> (&)(), std::vector<Neuron> (&)());
     Species(std::vector<Genome> genomes);
 
     void setGenomeLimit(unsigned int limit);
