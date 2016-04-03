@@ -5,34 +5,28 @@
 #include "Simulation.h"
 #include <iostream>
 
-Simulation::Simulation(SimulationDifficulty difficulty)
-{
+Simulation::Simulation(SimulationDifficulty difficulty) {
     setDifficulty(difficulty);
     this->start();
 }
 
-Simulation::~Simulation()
-{
+Simulation::~Simulation() {
     this->end();
 }
 
-void Simulation::start()
-{
+void Simulation::start() {
     this->thread = std::thread(Simulation::loop);
 }
 
-void Simulation::end()
-{
+void Simulation::end() {
     this->thread.join();
 }
 
-void Simulation::loop()
-{
+void Simulation::loop() {
     std::cout << "lol\n";
 }
 
-void Simulation::setDifficulty(SimulationDifficulty _difficulty)
-{
+void Simulation::setDifficulty(SimulationDifficulty _difficulty) {
     this->difficulty = _difficulty;
     switch (_difficulty)
     {

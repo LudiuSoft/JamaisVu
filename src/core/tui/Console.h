@@ -6,16 +6,24 @@
 #define JAMAISVU_CONSOLE_H
 
 #include <iostream>
-#include "AnsiText.h"
+#include <vector>
+#include "AnsiTextCode.h"
 #include "../util/Vector2.h"
 
 class Console {
 public:
-    void print(std::string text, std::initializer_list<AnsiTextOption> options);
-    void print(std::string text);
+    void setTextFormat(std::initializer_list<AnsiTextCode> textCodes);
+    void resetTextFormat();
+    void setCursorPosition(const Vector2<int>& position);
+    void setCursorPosition(const int& x, const int& y);
+    void clearConsole();
+    void print(const std::string& text);
+    void draw (const std::vector<std::string>& chars);
     Vector2<int> getNativeConsoleSize();
-
     Vector2<int> consoleSize;
+
+    Console();
+    ~Console();
 };
 
 

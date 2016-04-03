@@ -1,6 +1,6 @@
 #include <iostream>
+#include <zconf.h>
 
-#include "network/Species.h"
 #include "simulation/Simulation.h"
 #include "tui/Console.h"
 
@@ -19,9 +19,17 @@ int main()
 {
     //std::thread t1 (testFunc);
     //t1.join();
-    Console console;
+    Console* console = new Console;
 
-    std::cout << "\u0580";
+    std::cout << "\u0580" << std::endl;
+    console->draw(std::vector<std::string>
+    {
+            "████████████",
+            "███████████████",
+            "██████"
+    });
+    sleep(1);
+    delete console;
 
     return 0;
 }
