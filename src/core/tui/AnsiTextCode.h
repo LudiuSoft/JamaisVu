@@ -2,10 +2,10 @@
 // Created by chemicalchems on 1/04/16.
 //
 
-#ifndef JAMAISVU_ANSITEXT_H
-#define JAMAISVU_ANSITEXT_H
+#ifndef JAMAISVU_ANSITEXTCODE_H
+#define JAMAISVU_ANSITEXTCODE_H
 
-enum AnsiTextOption
+enum AnsiTextCode
 {
     /* GENERAL SETTINGS */
     reset           = 0,
@@ -61,4 +61,4 @@ enum AnsiTextOption
     bg_white        = 107,
 };
 
-#endif //JAMAISVU_ANSITEXT_H
+#endif //JAMAISVU_ANSITEXTCODE_H

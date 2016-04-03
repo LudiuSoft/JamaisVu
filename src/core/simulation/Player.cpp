@@ -5,8 +5,7 @@
 #include "Player.h"
 #include "Simulation.h"
 
-Player::Player()
-{
+Player::Player() {
     rnd = std::mt19937(time(0));
     this->exhaustion=0;
     this->thirst=0;
@@ -16,8 +15,7 @@ Player::Player()
     this->alive=true;
 }
 
-void Player::forage(double findFoodProbability, double findWaterProbability) //TODO: Make method capture args from the simulation the player is in
-{
+void Player::forage(double findFoodProbability, double findWaterProbability) { //TODO: Make method capture args from the simulation the player is in
     std::uniform_real_distribution<double> foundSomethingDist (0,1);
     bool foundFood  = (foundSomethingDist(rnd) <= findFoodProbability);
     bool foundWater = (foundSomethingDist(rnd) <= findWaterProbability);

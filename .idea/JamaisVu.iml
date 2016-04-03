@@ -19,7 +19,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Player.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/tui/Console.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/tui/Console.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/core/tui/AnsiText.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/tui/AnsiTextCode.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/toStr.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/Vector2.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />

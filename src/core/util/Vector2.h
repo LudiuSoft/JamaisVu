@@ -10,6 +10,9 @@ struct Vector2
 {
     T x;
     T y;
+
+    Vector2(int x, int y) : x(x), y(y){};
+    Vector2() {};
 };
 
 #endif //JAMAISVU_VECTOR2_H
