@@ -14,8 +14,8 @@ private:
 
     std::vector<Neuron> emptyNeuronVector;
 
-    std::vector<Neuron>& inputNeurons = emptyNeuronVector;
-    std::vector<Neuron>& outputNeurons = emptyNeuronVector;
+    std::vector<Neuron> inputNeurons = emptyNeuronVector;
+    std::vector<Neuron> outputNeurons = emptyNeuronVector;
 public:
     Generation();
     Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecies);     // Constructor for outer calls
