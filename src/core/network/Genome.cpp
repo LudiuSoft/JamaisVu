@@ -4,9 +4,9 @@
 
 #include "Genome.h"
 
-Genome::Genome(std::vector<Neuron> (&getInputNeurons)(), std::vector<Neuron> (&getOutputNeurons)()) {
-    this->getInputNeurons = getInputNeurons;
-    this->getOutputNeurons = getOutputNeurons;
+Genome::Genome(std::vector<Neuron> inputNeurons, std::vector<Neuron> outputNeurons) {
+    this->inputNeurons = inputNeurons;
+    this->outputNeurons = outputNeurons;
 }
 
 // For addRemoveMutation, the range is 0 - 5 (Recommended is 1 - 2)

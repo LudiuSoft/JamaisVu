@@ -14,7 +14,7 @@ Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecie
         species = std::vector<Species>();
     while (speciesPerGen !=0)
     {
-        species.push_back(Species(genomesPerSpecies, getInputNeurons, getOutputNeurons));
+        species.push_back(Species(genomesPerSpecies, this->inputNeurons, this->outputNeurons));
         speciesPerGen--;
     }
 }
