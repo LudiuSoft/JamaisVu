@@ -5,7 +5,7 @@
 #include "Species.h"
 #include <algorithm>
 
-Species::Species(unsigned int limit, std::vector<Neuron> inputNeurons, std::vector<Neuron> outputNeurons)
+Species::Species(unsigned int limit, std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeurons)
 {
     setGenomeLimit(limit);
     while (limit!=0)

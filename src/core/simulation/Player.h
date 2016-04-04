@@ -8,6 +8,7 @@
 #include <random>
 #include <iostream>
 #include "../util/Delta.h"
+#include <time.h>
 
 class Player {
 public:

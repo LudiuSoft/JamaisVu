@@ -16,11 +16,12 @@ private:
     std::vector<Gene> genes;
     std::vector<Neuron> neurons;
 
-    std::vector<Neuron> inputNeurons;
-    std::vector<Neuron> outputNeurons;
+    std::vector<Neuron> emptyVector;
+    std::vector<Neuron>& inputNeurons = emptyVector;
+    std::vector<Neuron>& outputNeurons = emptyVector;
 public:
     Genome() {};
-    Genome(std::vector<Neuron> inputNeurons, std::vector<Neuron> outputNeurons);
+    Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeurons);
 
     int fitness;
     void mutate(double addRemoveMutation, double geneWeightMutation);

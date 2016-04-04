@@ -4,7 +4,7 @@
 
 #include "Genome.h"
 
-Genome::Genome(std::vector<Neuron> inputNeurons, std::vector<Neuron> outputNeurons) {
+Genome::Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeurons) {
     this->inputNeurons = inputNeurons;
     this->outputNeurons = outputNeurons;
 }
