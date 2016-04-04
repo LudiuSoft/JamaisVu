@@ -8,7 +8,7 @@
 #include <sstream>
 
 template <typename T>
-struct Delta
+class Delta
 {
 private:
     T value;
@@ -38,7 +38,6 @@ public:
     operator T() const {return this->value;}
     friend std::ostream& operator << (std::ostream& out, const Delta<T>& obj) {return (out << obj.value);}
     friend void operator >> (std::istream& in, Delta<T>& obj) {in >> obj.value;}
-
 };
 
 #endif //JAMAISVU_DELTA_H
