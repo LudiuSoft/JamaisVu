@@ -6,15 +6,11 @@
 #define JAMAISVU_PLAYER_H
 
 #include <random>
-#include <functional>
 #include <iostream>
-
+#include "../util/Delta.h"
 
 class Player {
 public:
-    Player();
-
-    bool alive;
     float hunger;
     float thirst;
     float exhaustion;
@@ -22,13 +18,16 @@ public:
     unsigned int waterCount;
     std::mt19937 rnd;
 
-
-    void updateStats(int deltaTime);
+    Player();
     void forage(double findFoodProbability, double findWaterProbability); //TODO in src file Player.cpp
     void drink();
+    void setThrist (Delta<double> deltaThrist);
     void eat();
+    void setHunger (Delta<double> deltaHunger);
     void sleep();
+    void setExhaustion (Delta<double> deltaExhaustion);
     void doNothing();
+    void isAlive();
 };
 
 

@@ -8,25 +8,22 @@
 #include <thread>
 #include "Player.h"
 
-enum SimulationDifficulty {noob, easy, medium, hard, insane};
-
 class Simulation {
 public:
-    Simulation(SimulationDifficulty difficulty);
+    Simulation();
     ~Simulation();
 
     bool paused;
-    SimulationDifficulty difficulty;
     double findFoodProbability;
     double findWaterProbability;
-
     std::thread thread;
 
+    Player player;
     void start();
     void pause();
     void resume();
     void end();
-    void setDifficulty (SimulationDifficulty _difficulty);
+    void updatePlayerStats(int deltaTime);
     static void loop();
 
 };

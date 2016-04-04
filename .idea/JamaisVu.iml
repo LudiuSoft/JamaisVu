@@ -22,6 +22,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/core/tui/AnsiTextCode.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/toStr.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/Vector2.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/util/Delta.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
