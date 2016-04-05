@@ -9,9 +9,9 @@
 
 class Gene {
 private:
-    double fitness;
+    double fitness; //why the fuck is this here?
 /*
-    Neuron& input;
+    Neuron& input; //Why the fuck make them references?
     Neuron& output;*/
 
     bool invert;

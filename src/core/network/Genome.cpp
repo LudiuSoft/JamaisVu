@@ -4,6 +4,14 @@
 
 #include "Genome.h"
 
+Genome::Genome(const Genome &obj) {
+    this->fitness = obj.fitness;
+    this->neurons = obj.neurons;
+    this->genes = obj.genes;
+    this->inputNeurons = obj.inputNeurons;
+    this->outputNeurons = obj.outputNeurons;
+}
+
 Genome::Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeurons) {
     this->inputNeurons = inputNeurons;
     this->outputNeurons = outputNeurons;
@@ -48,4 +56,21 @@ void Genome::mutate(double addRemoveMutation, double geneWeightMutation) {
         geneWeightMutation -= result;
         // Apply result
     }
+}
+
+Genome& Genome::operator=(Genome&& obj) {
+    this->genes = std::move(obj.genes);
+    this->neurons = std::move(obj.neurons);
+    this->inputNeurons = std::move(obj.inputNeurons);
+    this->outputNeurons = std::move(obj.outputNeurons);
+    this->fitness = std::move(obj.fitness);
+}
+
+Genome& Genome::operator=(const Genome& obj) {
+    this->fitness = obj.fitness;
+    this->neurons = obj.neurons;
+    this->genes = obj.genes;
+    this->inputNeurons = obj.inputNeurons;
+    this->outputNeurons = obj.outputNeurons;
+    return *this;
 }
