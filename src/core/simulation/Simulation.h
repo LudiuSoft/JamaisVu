@@ -10,20 +10,22 @@
 
 class Simulation {
 public:
-    Simulation();
-    ~Simulation();
+
 
     bool paused;
+    bool isDay;
     double findFoodProbability;
     double findWaterProbability;
     std::thread thread;
-
     Player player;
+
+    Simulation();
+    ~Simulation();
     void start();
     void pause();
     void resume();
+    void endSimulationIfDead();
     void end();
-    void updatePlayerStats(int deltaTime);
     static void loop();
 
 };

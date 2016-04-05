@@ -18,7 +18,7 @@ public:
     void setCursorPosition(const int& x, const int& y);
     void clearConsole();
     void print(const std::string& text);
-    void draw (const std::vector<std::string>& chars);
+    void draw (const std::vector<std::string>& chars); //TODO: implement coloring for a single char or range of chars
     Vector2<int> getNativeConsoleSize();
     Vector2<int> consoleSize;
 

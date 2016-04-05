@@ -13,13 +13,15 @@
       <sourceFolder url="file://$MODULE_DIR$/src/core/network/Gene.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/network/Genome.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Player.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Simulation.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Simulation.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Controller.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Controller.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Player.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/simulation/Player.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/core/tui/Console.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/core/tui/Console.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/tui/AnsiTextCode.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/tui/Console.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/core/tui/Console.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/toStr.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/Vector2.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/Delta.h" isTestSource="false" />

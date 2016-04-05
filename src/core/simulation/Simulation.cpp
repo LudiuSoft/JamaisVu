@@ -5,7 +5,7 @@
 #include "Simulation.h"
 #include <iostream>
 
-Simulation::Simulation() {
+Simulation::Simulation() : player(*this) {
     this->start();
 }
 
@@ -22,7 +22,7 @@ void Simulation::end() {
 }
 
 void Simulation::loop() {
-    std::cout << "lol\n";
+
 }
 
 

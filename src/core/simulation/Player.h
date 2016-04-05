@@ -2,13 +2,16 @@
 // Created by chemicalchems on 29/03/16.
 //
 
+/* TODO: Fine-tune action hunger, thirst, and exhaustion deltas */
+
 #ifndef JAMAISVU_PLAYER_H
 #define JAMAISVU_PLAYER_H
+
+class Simulation; //forward declaration of Simulation to solve circular dependency
 
 #include <random>
 #include <iostream>
 #include "../util/Delta.h"
-#include <time.h>
 
 class Player {
 public:
@@ -18,17 +21,18 @@ public:
     unsigned int foodCount;
     unsigned int waterCount;
     std::mt19937 rnd;
+    Simulation& simulation;
 
-    Player();
+    Player(Simulation& simulation);
+    bool isAlive();
     void forage(double findFoodProbability, double findWaterProbability); //TODO in src file Player.cpp
     void drink();
-    void setThrist (Delta<double> deltaThrist);
+    void setThirst (Delta<double> deltaThrist);
     void eat();
     void setHunger (Delta<double> deltaHunger);
     void sleep();
     void setExhaustion (Delta<double> deltaExhaustion);
     void doNothing();
-    void isAlive();
 };
 
 
