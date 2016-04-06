@@ -63,7 +63,7 @@ Vector2<int> Console::getNativeConsoleSize() {
     CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
     HANDLE hConsoleOut = GetStdHandle( STD_OUTPUT_HANDLE );
     GetConsoleScreenBufferInfo( hConsoleOut, &csbiInfo );
-    return Vector2<int> {csbiInfo.srWindow.right - csbiInfo.srWindow.left, csbiInfo.dwSize.bottom - csbiInfo.srWindow.top};
+    return Vector2<int> {csbiInfo.srWindow.right - csbiInfo.srWindow.left +1, csbiInfo.dwSize.bottom - csbiInfo.srWindow.top +1;
 #else
     winsize size;
     ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
