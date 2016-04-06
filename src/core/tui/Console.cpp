@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 #if defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
+#include <Windows.h>
 #else
 #include <sys/ioctl.h>
 #include <zconf.h>
