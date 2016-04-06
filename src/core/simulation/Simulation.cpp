@@ -9,10 +9,6 @@ Simulation::Simulation() : player(*this) {
     this->start();
 }
 
-Simulation::~Simulation() {
-    this->end();
-}
-
 void Simulation::start() {
     this->thread = std::thread(Simulation::loop);
 }
@@ -22,7 +18,10 @@ void Simulation::end() {
 }
 
 void Simulation::loop() {
-
+    while(true)
+    {
+        std::cout << "lol\n";
+    }
 }
 
 

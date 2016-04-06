@@ -20,7 +20,6 @@ public:
     Player player;
 
     Simulation();
-    ~Simulation();
     void start();
     void pause();
     void resume();

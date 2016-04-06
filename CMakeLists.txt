@@ -11,7 +11,7 @@ set(SOURCE_FILES src/core/main.cpp
                  src/core/network/Neuron.h src/core/network/Neuron.cpp
                  src/core/simulation/Simulation.cpp src/core/simulation/Simulation.h
                  src/core/simulation/Player.cpp src/core/simulation/Player.h src/core/tui/Console.cpp
-                 src/core/tui/Console.h src/core/tui/AnsiTextCode.h src/core/util/toStr.h src/core/util/Vector2.h src/core/util/Delta.h src/core/simulation/Controller.cpp src/core/simulation/Controller.h)
+                 src/core/tui/Console.h src/core/tui/AnsiTextCode.h src/core/util/toStr.h src/core/util/Vector2.h src/core/util/Delta.h src/core/simulation/Controller.cpp src/core/simulation/Controller.h src/core/network/Network.cpp src/core/network/Network.h src/core/tui/TUI.cpp src/core/tui/TUI.h)
 
 add_executable(JamaisVu ${SOURCE_FILES})
 

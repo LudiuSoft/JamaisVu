@@ -21,7 +21,7 @@ private:
 public:
     Genome() {};
     Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeurons);
-    Genome (const Genome& obj);
+    Genome(const Genome& obj);
 
     int fitness;
     void mutate(double addRemoveMutation, double geneWeightMutation);
