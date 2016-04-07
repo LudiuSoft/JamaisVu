@@ -8,9 +8,17 @@
 int main()
 {
     Console* console = new Console;
-    Vector2<int> consoleSize = console->getNativeConsoleSize();
-    std::cout << consoleSize.x<< "," << consoleSize.y;
-    console->setCursorPosition(consoleSize.x,consoleSize.y);
+    std::cout << console->consoleSize.x<< "," << console->consoleSize.y;
+    console->draw(
+            {
+                    "asdf",
+                    "asdf"
+            },
+            {
+                    {{fg_cyan}, {}, {fg_black}, {bg_cyan}},
+                    {{bg_blue}, {bold, fg_cyan}, {fg_cyan}, {bg_darkgray}}
+            });
+    console->setCursorPosition(console->consoleSize);
     console->print("1");
     sleep(1);
     delete console;

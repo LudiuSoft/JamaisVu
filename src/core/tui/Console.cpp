@@ -4,13 +4,14 @@
 
 #include "Console.h"
 #include "../util/toStr.h"
-#include <iostream>
 #include <sstream>
 #if defined(_WIN32) || defined(_WIN64)
 #include <Windows.h>
 #else
 #include <sys/ioctl.h>
 #include <zconf.h>
+#include <assert.h>
+
 #endif
 
 void Console::setTextFormat(std::initializer_list<AnsiTextCode> textCodes) {
@@ -46,20 +47,24 @@ void Console::print(const std::string& text) {
     std::cout << text;
 }
 
-void Console::draw(const std::vector<std::string>& chars) {
-    for (std::string line : chars) { std::cout << line << std::endl;}
-}
-
-Console::Console() {
-    this->clearConsole();
-}
-
-Console::~Console() {
-    //this->clearConsole();
+void Console::draw(const std::vector<std::string>& strings,
+                   const std::vector<std::vector<std::initializer_list<AnsiTextCode>>>& formats) {
+    assert(("Format size and text size don't match",strings.size() == formats.size()));
+    for (int stringIndex = 0; stringIndex <= strings.size() - 1; stringIndex++)
+    {
+        assert(("Format size and text size don't match",strings.at(stringIndex).size() == formats.at(stringIndex).size()));
+        for (int charIndex = 0; charIndex <= strings.at(stringIndex).size() - 1; charIndex++)
+        {
+            this->setTextFormat(formats.at(stringIndex).at(charIndex));
+            std::cout << strings.at(stringIndex).at(charIndex);
+            this->resetTextFormat();
+        }
+        std::cout << std::endl;
+    }
 }
 
 Vector2<int> Console::getNativeConsoleSize() {
-#if defined(_WIN32) || defined(_WIN64)
+#if (defined(_WIN32) || defined(_WIN64))
     CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
     HANDLE hConsoleOut = GetStdHandle( STD_OUTPUT_HANDLE );
     GetConsoleScreenBufferInfo( hConsoleOut, &csbiInfo );
@@ -69,4 +74,14 @@ Vector2<int> Console::getNativeConsoleSize() {
     ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
     return Vector2<int> {size.ws_col, size.ws_row};
 #endif
+}
+
+
+Console::Console() {
+    this->consoleSize = this->getNativeConsoleSize();
+    this->clearConsole();
+}
+
+Console::~Console() {
+    //this->clearConsole();
 }
