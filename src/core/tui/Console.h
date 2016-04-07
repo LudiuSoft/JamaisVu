@@ -18,7 +18,7 @@ public:
     void setCursorPosition(const int& x, const int& y);
     void clearConsole();
     void print(const std::string& text);
-    void draw (const std::vector<std::string>& chars,
+    void draw (const std::vector<std::u32string>& chars,
                const std::vector<std::vector<std::initializer_list<AnsiTextCode>>>& formats);
     Vector2<int> getNativeConsoleSize();
     Vector2<int> consoleSize;

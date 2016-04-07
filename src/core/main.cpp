@@ -8,16 +8,14 @@
 int main()
 {
     Console* console = new Console;
-    std::cout << console->consoleSize.x<< "," << console->consoleSize.y;
-    console->draw(
-            {
-                    "asdf",
-                    "asdf"
-            },
-            {
-                    {{fg_cyan}, {}, {fg_black}, {bg_cyan}},
-                    {{bg_blue}, {bold, fg_cyan}, {fg_cyan}, {bg_darkgray}}
-            });
+    console->draw({
+                          {U"█\u2588"},
+                          {U"sa"}
+                  },
+                  {
+                          {{fg_magenta}, {fg_cyan}},
+                          {{fg_blue}, {bold, underlined, fg_black, bg_cyan}}
+                  });
     console->setCursorPosition(console->consoleSize);
     console->print("1");
     sleep(1);

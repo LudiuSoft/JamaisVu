@@ -5,13 +5,14 @@
 #include "Console.h"
 #include "../util/toStr.h"
 #include <sstream>
+#include <codecvt>
+#include <locale>
+#include <assert.h>
 #if defined(_WIN32) || defined(_WIN64)
 #include <Windows.h>
 #else
 #include <sys/ioctl.h>
 #include <zconf.h>
-#include <assert.h>
-
 #endif
 
 void Console::setTextFormat(std::initializer_list<AnsiTextCode> textCodes) {
@@ -47,16 +48,22 @@ void Console::print(const std::string& text) {
     std::cout << text;
 }
 
-void Console::draw(const std::vector<std::string>& strings,
+void Console::draw(const std::vector<std::u32string>& strings,
                    const std::vector<std::vector<std::initializer_list<AnsiTextCode>>>& formats) {
+
+
+    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter; //Used to pass from u32string to bytes
+
     assert(("Format size and text size don't match",strings.size() == formats.size()));
+
     for (int stringIndex = 0; stringIndex <= strings.size() - 1; stringIndex++)
     {
         assert(("Format size and text size don't match",strings.at(stringIndex).size() == formats.at(stringIndex).size()));
+
         for (int charIndex = 0; charIndex <= strings.at(stringIndex).size() - 1; charIndex++)
         {
             this->setTextFormat(formats.at(stringIndex).at(charIndex));
-            std::cout << strings.at(stringIndex).at(charIndex);
+            std::cout << converter.to_bytes(strings.at(stringIndex).at(charIndex));
             this->resetTextFormat();
         }
         std::cout << std::endl;
