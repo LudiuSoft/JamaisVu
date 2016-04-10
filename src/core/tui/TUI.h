@@ -7,11 +7,15 @@
 
 #include "Console.h"
 #include "../simulation/Simulation.h"
+#include "../util/Rect.h"
 
 class TUI {
+public:
     Console console;
     std::vector<Simulation> simulations;
+    std::vector<Rect> simulationRects;
 
+    TUI();
     void drawSimulation(Simulation simulation);
     void drawFrames();
 };

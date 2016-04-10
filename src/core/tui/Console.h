@@ -12,16 +12,19 @@
 
 class Console {
 public:
+    Vector2<int> consoleSize;
+    Vector2<int> cursorPosition;
+
     void setTextFormat(std::initializer_list<AnsiTextCode> textCodes);
     void resetTextFormat();
     void setCursorPosition(const Vector2<int>& position);
     void setCursorPosition(const int& x, const int& y);
     void clearConsole();
     void print(const std::string& text);
-    void draw (const std::vector<std::u32string>& chars,
+    void draw (const std::vector<std::u32string>& chars, const std::vector<Vector2<int>>& stringPositions,
                const std::vector<std::vector<std::initializer_list<AnsiTextCode>>>& formats);
+    void draw (const std::vector<std::u32string>& chars, const std::vector<Vector2<int>>& stringPositions);
     Vector2<int> getNativeConsoleSize();
-    Vector2<int> consoleSize;
 
     Console();
     ~Console();

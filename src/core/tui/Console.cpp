@@ -33,6 +33,7 @@ void Console::resetTextFormat() {
 
 void Console::setCursorPosition(const Vector2<int>& position) {
     std::cout << "\033[" << position.y << ";" << position.x << "H";
+    this->cursorPosition = position;
 }
 
 void Console::setCursorPosition(const int& x, const int& y) {
@@ -48,34 +49,50 @@ void Console::print(const std::string& text) {
     std::cout << text;
 }
 
-void Console::draw(const std::vector<std::u32string>& strings,
+void Console::draw(const std::vector<std::u32string>& strings, const std::vector<Vector2<int>>& stringPositions,
                    const std::vector<std::vector<std::initializer_list<AnsiTextCode>>>& formats) {
 
 
     std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter; //Used to pass from u32string to bytes
-
-    assert(("Format size and text size don't match",strings.size() == formats.size()));
+    assert(("Position vector size and string number don't match", strings.size() == stringPositions.size()));
+    assert(("Format size and text size don't match", strings.size() == formats.size()));
 
     for (int stringIndex = 0; stringIndex <= strings.size() - 1; stringIndex++)
     {
         assert(("Format size and text size don't match",strings.at(stringIndex).size() == formats.at(stringIndex).size()));
 
+        this->setCursorPosition(stringPositions.at(stringIndex));
         for (int charIndex = 0; charIndex <= strings.at(stringIndex).size() - 1; charIndex++)
         {
             this->setTextFormat(formats.at(stringIndex).at(charIndex));
             std::cout << converter.to_bytes(strings.at(stringIndex).at(charIndex));
             this->resetTextFormat();
         }
-        std::cout << std::endl;
     }
 }
+
+void Console::draw(const std::vector<std::u32string>& strings, const std::vector<Vector2<int>>& stringPositions) {
+    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter; //Used to pass from u32string to bytes
+    assert(("Position vector size and string number don't match", strings.size() == stringPositions.size()));
+
+    for (int stringIndex = 0; stringIndex <= strings.size() - 1; stringIndex++)
+    {
+
+        this->setCursorPosition(stringPositions.at(stringIndex));
+        for (int charIndex = 0; charIndex <= strings.at(stringIndex).size() - 1; charIndex++)
+        {
+            std::cout << converter.to_bytes(strings.at(stringIndex).at(charIndex));
+        }
+    }
+}
+
 
 Vector2<int> Console::getNativeConsoleSize() {
 #if (defined(_WIN32) || defined(_WIN64))
     CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
     HANDLE hConsoleOut = GetStdHandle( STD_OUTPUT_HANDLE );
     GetConsoleScreenBufferInfo( hConsoleOut, &csbiInfo );
-    return Vector2<int> {csbiInfo.srWindow.right - csbiInfo.srWindow.left +1, csbiInfo.dwSize.bottom - csbiInfo.srWindow.top +1;
+    return Vector2<int> (csbiInfo.srWindow.Right - csbiInfo.srWindow.Left +1, csbiInfo.srWindow.Bottom - csbiInfo.srWindow.Top +1);
 #else
     winsize size;
     ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
