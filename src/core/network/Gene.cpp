@@ -4,9 +4,15 @@
 
 #include "Gene.h"
 
-Gene::Gene()
+Gene::Gene(Neuron& input, Neuron& output)
 {
-    fitness = 20;
+    this->input = &input;
+    this->output = &output;
     invert = true;
     weight = 0.7;
+}
+
+void Gene::destroy() {
+    input->disconnectGene(this);
+    output->disconnectGene(this);
 }

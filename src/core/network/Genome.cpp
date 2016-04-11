@@ -2,7 +2,6 @@
 // Created by IPat (Local) on 01.04.2016.
 //
 
-#include "../util/randomUtil.h" // Don't like this line, but it fixes the problem (Try moving this to header if possible)
 #include "Genome.h"
 
 Genome::Genome(const Genome &obj) {
@@ -32,17 +31,19 @@ void Genome::mutate(double addRemoveMutation, double geneWeightMutation) {
     const float deltaDistribution = 0.6;
 
     // Destroy neurons or genes
-    const double destroyNeuronProb = addRemoveMutation * 3 / 100;
+    const double destroyNeuronProb = addRemoveMutation * 2 / 100;
     const double destroyGeneProb = addRemoveMutation * 15 / 100;
 
     if (chance(destroyNeuronProb)) {
-        // TODO: Destroy genes that are connected to Neuron
-        neurons.erase(neurons.begin()+(int)(random0to1()*neurons.size()));
+        unsigned int neuronIndex = getRandomNeuronIndex();
+        neurons.at(neuronIndex).destroy();
+        neurons.erase(neurons.begin()+neuronIndex);
     }
 
     if (chance(destroyGeneProb)) {
-        // TODO: Properly call a disconnect method to notify neurons about connection being gone
-        genes.erase(genes.begin()+(int)(random0to1()*genes.size()));
+        unsigned int geneIndex = getRandomGeneIndex();
+        genes.at(geneIndex).destroy();
+        genes.erase(genes.begin()+geneIndex);
     }
 
     // Create new neurons or genes
@@ -86,4 +87,12 @@ Genome& Genome::operator=(const Genome& obj) {
     this->inputNeurons = obj.inputNeurons;
     this->outputNeurons = obj.outputNeurons;
     return *this;
+}
+
+unsigned int Genome::getRandomGeneIndex() {
+    return (unsigned int)(random0to1()*genes.size());
+}
+
+unsigned int Genome::getRandomNeuronIndex() {
+    return (unsigned int)(random0to1()*neurons.size());
 }

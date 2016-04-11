@@ -26,6 +26,9 @@ public:
     bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
     Genome& operator = (Genome&& obj);
     Genome& operator = (const Genome& obj);
+
+    unsigned int getRandomGeneIndex();
+    unsigned int getRandomNeuronIndex();
 };
 
 
