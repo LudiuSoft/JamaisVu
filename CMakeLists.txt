@@ -15,7 +15,7 @@ set(SOURCE_FILES src/core/main.cpp
                  src/core/util/Delta.h src/core/simulation/Controller.cpp src/core/simulation/Controller.h
                  src/core/network/Network.cpp src/core/network/Network.h src/core/tui/TUI.cpp src/core/tui/TUI.h)
 
-add_executable(JamaisVu ${SOURCE_FILES})
+add_executable(JamaisVu ${SOURCE_FILES} src/core/util/randomUtil.h src/core/util/randomUtil.h src/core/util/randomUtil.h)
 
 find_package(Threads REQUIRED)
 

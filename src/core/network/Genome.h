@@ -7,9 +7,6 @@
 
 #include <vector>
 #include "Gene.h"
-#include <stdlib.h>
-#include <random>
-#include <time.h>
 
 class Genome {
 private:

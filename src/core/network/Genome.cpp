@@ -2,6 +2,7 @@
 // Created by IPat (Local) on 01.04.2016.
 //
 
+#include "../util/randomUtil.h" // Don't like this line, but it fixes the problem (Try moving this to header if possible)
 #include "Genome.h"
 
 Genome::Genome(const Genome &obj) {
@@ -28,29 +29,41 @@ Genome::Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeu
 // ready for experiments.
 
 void Genome::mutate(double addRemoveMutation, double geneWeightMutation) {
-    const float deltaMutation = 0.6;
-    std::mt19937 rnd;
-    std::uniform_real_distribution<double> randomPreDivisionMutationDist;
+    const float deltaDistribution = 0.6;
 
     // Destroy neurons or genes
-    const double destroyNeuronProb = addRemoveMutation*2/100;
-    const double destroyGeneProb = addRemoveMutation*8/100;
+    const double destroyNeuronProb = addRemoveMutation * 3 / 100;
+    const double destroyGeneProb = addRemoveMutation * 15 / 100;
+
+    if (chance(destroyNeuronProb)) {
+        // TODO: Destroy genes that are connected to Neuron
+        neurons.erase(neurons.begin()+(int)(random0to1()*neurons.size()));
+    }
+
+    if (chance(destroyGeneProb)) {
+        // TODO: Properly call a disconnect method to notify neurons about connection being gone
+        genes.erase(genes.begin()+(int)(random0to1()*genes.size()));
+    }
 
     // Create new neurons or genes
-    const double createNeuronProb = addRemoveMutation*5/100;
-    const double createGeneProb = addRemoveMutation*20/100;
+    const double createNeuronProb = addRemoveMutation * 5 / 100;
+    const double createGeneProb = addRemoveMutation * 20 / 100;
+
+    if (chance(createNeuronProb)) neurons.push_back(Neuron());
+
+    if (chance(createGeneProb)) {
+        // TODO: Modify Gene class so it receives input and output neuron in constructor
+        genes.push_back(Gene());
+    }
 
     // Modify gene weights
 
-    int geneAmount = (int)genes.size();
-    while (geneAmount != 0)
-    {
-        const double lowerLimit = geneWeightMutation *(1-deltaMutation);
-        const double upperLimit = geneWeightMutation *(1+deltaMutation);
+    int geneAmount = (int) genes.size();
+    while (geneAmount != 0) {
+        const double lowerLimit = geneWeightMutation * (1 - deltaDistribution);
+        const double upperLimit = geneWeightMutation * (1 + deltaDistribution);
 
-        rnd = std::mt19937((unsigned int)time(0));
-        randomPreDivisionMutationDist = std::uniform_real_distribution<double>(lowerLimit,upperLimit);
-        const double result = randomPreDivisionMutationDist(rnd)/geneAmount;
+        const double result = randDouble(lowerLimit, upperLimit) / geneAmount;
 
         geneAmount--;
         geneWeightMutation -= result;
