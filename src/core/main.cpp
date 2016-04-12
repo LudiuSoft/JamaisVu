@@ -9,18 +9,17 @@
 
 TUI tui;
 
-void exit(int signum) {
+void end(int signum) {
     std::cout << "\033[?25h";
-    exit(signum);
     tui.console.clearConsole();
+    exit(signum);
 }
 
 int main() {
-    signal(SIGINT, exit);
+    signal(SIGINT, end);
     std::cout << "\033[?25l";
-    while (true) {
+    while (true)
+    {
         tui.drawFrames();
-
     }
-
 }

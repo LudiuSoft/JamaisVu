@@ -8,6 +8,7 @@
 #include <codecvt>
 #include <locale>
 #include <assert.h>
+#include <algorithm>
 #if defined(_WIN32) || defined(_WIN64)
 #include <Windows.h>
 #else
@@ -83,6 +84,17 @@ void Console::draw(const std::vector<std::u32string>& strings, const std::vector
         {
             std::cout << converter.to_bytes(strings.at(stringIndex).at(charIndex));
         }
+    }
+}
+
+void Console::draw(const std::vector<std::u32string>& strings)
+{
+    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter; //Used to pass from u32string to bytes
+
+    for (int string = 0; string < strings.size(); string++)
+    {
+        this->setCursorPosition(1,string +1);
+        std::cout << converter.to_bytes(strings.at(string));
     }
 }
 

@@ -12,27 +12,7 @@ void TUI::drawFrames() {
     std::u32string middleVerticalFrameString;
 
     if (console.consoleSize.x % 2 == 0) {middleVerticalFrameString = U"┃┃";}
-    else                                {middleVerticalFrameString = U"┃╋┃";}
-
-    std::vector<std::u32string> middleVerticalFrameStrings;
-    std::vector<std::u32string> middleHorizontalFrameStrings;
-
-    std::vector<Vector2<int>> middleVerticalFrameStringPositions;
-    std::vector<Vector2<int>> middleHorizontalFrameStringPositions;
-
-
-    for (int row = 1; row <= console.consoleSize.y; row++)
-    {
-        middleVerticalFrameStrings.push_back(middleVerticalFrameString);
-        if (console.consoleSize.x % 2 == 0)
-        {
-            middleVerticalFrameStringPositions.push_back(Vector2<int>{console.consoleSize.x/2, row});
-        }
-        else
-        {
-            middleVerticalFrameStringPositions.push_back(Vector2<int>{console.consoleSize.x/2+1, row});
-        }
-    }
+    else                                {middleVerticalFrameString = U" ┃";}
 
     int upperMiddleHorizontalFrameLimit;
     int lowerMiddleHorizontalFrameLimit;
@@ -49,25 +29,44 @@ void TUI::drawFrames() {
         lowerMiddleHorizontalFrameLimit = upperMiddleHorizontalFrameLimit + 2;
     }
 
-    for (int row = upperMiddleHorizontalFrameLimit; row <= lowerMiddleHorizontalFrameLimit; row++)
+    std::vector<std::u32string> frameLines;
+
+    for (int row = 1; row <= console.consoleSize.y; row++)
     {
-        std::u32string chars;
-        if (console.consoleSize.x % 2 == 0)
+        std::u32string line;
+
+        line.resize(console.consoleSize.x, char32_t(32)); //fill line with spaces
+
+        line.replace(console.consoleSize.x/2-1, middleVerticalFrameString.length(), middleVerticalFrameString);
+
+        if (row == 1)
         {
-            chars.insert(0, console.consoleSize.x/2-1, char32_t(9473));
-            chars += U"  ";
-            chars.insert(console.consoleSize.x/2, console.consoleSize.x/2+1, char32_t(9473));
+            line.replace(0, line.length(), line.length(), char32_t(9473));
+            line.replace(0, 1, U"┏");
+            line.replace(console.consoleSize.x/2, 1, U"┳");
+            line.replace(console.consoleSize.x-1, 1, U"┓");
+        }
+        else if (row > upperMiddleHorizontalFrameLimit && row < lowerMiddleHorizontalFrameLimit)
+        {
+            line.replace(0, line.length(), line.length(), char32_t(9473));
+            line.replace(console.consoleSize.x/2, 1, U"╋");
+            line.replace(0, 1, U"┣");
+            line.replace(console.consoleSize.x-1, 1, U"┫");
+        }
+        else if (row == console.consoleSize.y)
+        {
+            line.replace(0, line.length(), line.length(), char32_t(9473));
+            line.replace(0, 1, U"┗");
+            line.replace(console.consoleSize.x/2, 1, U"┻");
+            line.replace(console.consoleSize.x-1, 1, U"┛");
         }
         else
         {
-            chars.insert(0, console.consoleSize.x/2, char32_t(9473));
-            chars += U"  ";
-            chars.insert(console.x, console.consoleSize.x/2-1, char32_t(9473));
+            line.replace(0,1,U"┃");
+            line.replace(console.consoleSize.x-1, 1, U"┃");
         }
-        middleHorizontalFrameStrings.push_back(chars);
-        middleHorizontalFrameStringPositions.push_back(Vector2<int> {1, row});
+        frameLines.push_back(line);
     }
 
-    console.draw(middleVerticalFrameStrings, middleVerticalFrameStringPositions);
-    console.draw(middleHorizontalFrameStrings, middleHorizontalFrameStringPositions);
+    console.draw(frameLines);
 }

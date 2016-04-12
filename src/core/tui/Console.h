@@ -24,6 +24,7 @@ public:
     void draw (const std::vector<std::u32string>& chars, const std::vector<Vector2<int>>& stringPositions,
                const std::vector<std::vector<std::initializer_list<AnsiTextCode>>>& formats);
     void draw (const std::vector<std::u32string>& chars, const std::vector<Vector2<int>>& stringPositions);
+    void draw(const std::vector<std::u32string>& strings);
     Vector2<int> getNativeConsoleSize();
 
     Console();
