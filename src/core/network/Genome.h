@@ -5,20 +5,20 @@
 #ifndef JAMAISVU_GENOME_H
 #define JAMAISVU_GENOME_H
 
-#include <vector>
+#include <list>
 #include "Gene.h"
 #include "../util/Delta.h"
 
 class Genome {
 private:
-    std::vector<Gene> genes;
-    std::vector<Neuron> neurons;
+    std::list<Gene> genes;
+    std::list<Neuron> neurons;
 
-    std::vector<Neuron> inputNeurons;
-    std::vector<Neuron> outputNeurons;
+    std::list<Neuron> inputNeurons;
+    std::list<Neuron> outputNeurons;
 public:
     Genome() {};
-    Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeurons);
+    Genome(std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons);
     Genome(const Genome& obj);
 
     int fitness;

@@ -12,7 +12,7 @@ Genome::Genome(const Genome &obj) {
     this->outputNeurons = obj.outputNeurons;
 }
 
-Genome::Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeurons) {
+Genome::Genome(std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons) {
     this->inputNeurons = inputNeurons;
     this->outputNeurons = outputNeurons;
 }
@@ -36,14 +36,20 @@ void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
 
     if (chance(destroyNeuronProb)) {
         unsigned int neuronIndex = getRandomNeuronIndex();
-        neurons.at(neuronIndex).destroy();
-        neurons.erase(neurons.begin()+neuronIndex);
+        auto neuronsIterator = neurons.begin();
+        std::advance(neuronsIterator, neuronIndex);
+
+        neuronsIterator->destroy();
+        neurons.erase(neuronsIterator);
     }
 
     if (chance(destroyGeneProb)) {
         unsigned int geneIndex = getRandomGeneIndex();
-        genes.at(geneIndex).destroy();
-        genes.erase(genes.begin()+geneIndex);
+        auto genesIterator = genes.begin();
+        std::advance(genesIterator, geneIndex);
+
+        genesIterator->destroy();
+        genes.erase(genesIterator);
     }
 
     // Create new neurons or genes

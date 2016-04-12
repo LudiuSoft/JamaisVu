@@ -7,19 +7,17 @@
 
 #include "Species.h"
 #include "../util/Delta.h"
-#include <vector>
+#include <list>
 
 class Generation {
 private:
     std::vector<Species> species;
 
-    std::vector<Neuron> emptyNeuronVector;
-
-    std::vector<Neuron>& inputNeurons = emptyNeuronVector;
-    std::vector<Neuron>& outputNeurons = emptyNeuronVector;
+    std::vector<Neuron>* inputNeurons;
+    std::vector<Neuron>* outputNeurons;
 public:
     Generation();
-    Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecies);     // Constructor for outer calls
+    Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecies, std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons);
 
     void setInputNeurons(std::vector<Neuron>& input);
     void setOutputNeurons(std::vector<Neuron>& output);

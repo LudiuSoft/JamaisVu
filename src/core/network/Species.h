@@ -8,7 +8,7 @@
 #include "Genome.h"
 #include "Gene.h"
 #include "Neuron.h"
-#include <vector>
+#include <list>
 
 class Species {
 private:
@@ -16,7 +16,7 @@ private:
     unsigned int maxGenomes;
 public:
     Species() {};
-    Species(unsigned int limit, std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeurons);
+    Species(unsigned int limit, std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons);
     Species(std::vector<Genome> genomes);
 
     void setGenomeLimit(unsigned int limit);

@@ -8,13 +8,13 @@ Generation::Generation() {
 
 }
 
-Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecies)
+Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecies, std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons)
 {
     if (species.size()!=0)
         species = std::vector<Species>();
     while (speciesPerGen !=0)
     {
-        species.push_back(Species(genomesPerSpecies, this->inputNeurons, this->outputNeurons));
+        species.push_back(Species(genomesPerSpecies, inputNeurons, outputNeurons));
         speciesPerGen--;
     }
 }
@@ -28,17 +28,17 @@ void Generation::evolve(Delta<double> deltaMutation, double geneWeightMutation)
 }
 
 void Generation::setInputNeurons(std::vector<Neuron> &input) {
-    inputNeurons = input;
+    inputNeurons = &input;
 }
 
 void Generation::setOutputNeurons(std::vector<Neuron> &output) {
-    outputNeurons = output;
+    outputNeurons = &output;
 }
 
 std::vector<Neuron> Generation::getInputNeurons() {
-    return inputNeurons;
+    return *inputNeurons;
 }
 
 std::vector<Neuron> Generation::getOutputNeurons() {
-    return outputNeurons;
+    return *outputNeurons;
 }
