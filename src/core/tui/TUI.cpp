@@ -8,7 +8,7 @@ TUI::TUI() {
 
 }
 
-void TUI::drawFrames() {
+void TUI::drawFrames() { //TODO: Refactor and change var names to more descriptive names
     std::u32string middleVerticalFrameString;
 
     if (console.consoleSize.x % 2 == 0) {middleVerticalFrameString = U"┃┃";}

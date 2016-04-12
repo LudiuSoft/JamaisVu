@@ -22,8 +22,10 @@ static bool chance(double percentage) {
     return random0to1() < percentage;
 }
 
-static double randDouble(double lowerRange, double upperBound) {
-    return lowerRange + random0to1() * (upperBound - lowerRange);
+template<typename T> //TODO: Add support for integral types with std::uniform_int_distribution<T>
+static T randomValueFromInterval (T lowerBound, T upperBound) {
+    std::uniform_real_distribution<T>distribution;
+    return distribution(rnddev);
 }
 
 #endif //JAMAISVU_RANDOMUTIL_H

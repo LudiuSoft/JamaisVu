@@ -22,7 +22,7 @@ public:
     Genome(const Genome& obj);
 
     int fitness;
-    void mutate(Delta addRemoveMutation, Delta geneWeightMutation);
+    void mutate(double addRemoveMutation, Delta<double> geneWeightMutation);
 
     bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
     Genome& operator = (Genome&& obj);

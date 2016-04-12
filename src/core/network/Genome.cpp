@@ -27,12 +27,12 @@ Genome::Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeu
 // to the amount of genes if there are many, making the more weight change possibilities (due to more genes and neurons)
 // ready for experiments.
 
-void Genome::mutate(Delta<double> addRemoveMutation, Delta<double> geneWeightMutation) {
+void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta) {
     const float deltaDistribution = 0.6;
 
     // Destroy neurons or genes
-    const double destroyNeuronProb = addRemoveMutation * 2 / 100;
-    const double destroyGeneProb = addRemoveMutation * 15 / 100;
+    const double destroyNeuronProb = networkChangeFactor * 2 / 100;
+    const double destroyGeneProb = networkChangeFactor * 15 / 100;
 
     if (chance(destroyNeuronProb)) {
         unsigned int neuronIndex = getRandomNeuronIndex();
@@ -47,8 +47,8 @@ void Genome::mutate(Delta<double> addRemoveMutation, Delta<double> geneWeightMut
     }
 
     // Create new neurons or genes
-    const double createNeuronProb = addRemoveMutation * 5 / 100;
-    const double createGeneProb = addRemoveMutation * 20 / 100;
+    const double createNeuronProb = networkChangeFactor * 5 / 100;
+    const double createGeneProb = networkChangeFactor * 20 / 100;
 
     if (chance(createNeuronProb)) neurons.push_back(Neuron());
 
@@ -61,13 +61,13 @@ void Genome::mutate(Delta<double> addRemoveMutation, Delta<double> geneWeightMut
 
     int geneAmount = (int) genes.size();
     while (geneAmount != 0) {
-        const double lowerLimit = geneWeightMutation * (1 - deltaDistribution);
-        const double upperLimit = geneWeightMutation * (1 + deltaDistribution);
+        const double lowerLimit = totalGeneWeightDelta * (1 - deltaDistribution);
+        const double upperLimit = totalGeneWeightDelta * (1 + deltaDistribution);
 
-        const double result = randDouble(lowerLimit, upperLimit) / geneAmount;
+        const double result = randomValueFromInterval(lowerLimit, upperLimit) / geneAmount;
 
         geneAmount--;
-        geneWeightMutation -= result;
+        totalGeneWeightDelta -= result;
         // Apply result
     }
 }

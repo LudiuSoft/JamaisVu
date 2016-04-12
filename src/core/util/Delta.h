@@ -16,24 +16,24 @@ public:
     Delta() {};
     Delta(T value) {this->value = value;}
 
-    bool operator == (const T& it) const {return it == this->value;}
-    bool operator != (const T& it) const {return !it == *this;}
-    bool operator >= (const T& it) const {return it >= this->value;}
-    bool operator <= (const T& it) const {return it <= this->value;}
-    bool operator >  (const T& it) const {return it >  this->value;}
-    bool operator <  (const T& it) const {return it <  this->value;}
+    bool operator == (const T& obj) const {return obj == this->value;}
+    bool operator != (const T& obj) const {return !obj == *this;}
+    bool operator >= (const T& obj) const {return obj >= this->value;}
+    bool operator <= (const T& obj) const {return obj <= this->value;}
+    bool operator >  (const T& obj) const {return obj >  this->value;}
+    bool operator <  (const T& obj) const {return obj <  this->value;}
 
-    T operator + (const T& it) const {return it + this->value;}
-    T operator - (const T& it) const {return it - this->value;}
-    T operator * (const T& it) const {return it * this->value;}
-    T operator / (const T& it) const {return it / this->value;}
+    T operator + (const T& obj) const {return obj + this->value;}
+    T operator - (const T& obj) const {return obj - this->value;}
+    T operator * (const T& obj) const {return obj * this->value;}
+    T operator / (const T& obj) const {return obj / this->value;}
 
-    void operator += (const T& it) {this->value += it;}
-    void operator -= (const T& it) {this->value -= it;}
-    void operator *= (const T& it) {this->value *= it;}
-    void operator /= (const T& it) {this->value /= it;}
+    void operator += (const T& obj) {this->value += obj;}
+    void operator -= (const T& obj) {this->value -= obj;}
+    void operator *= (const T& obj) {this->value *= obj;}
+    void operator /= (const T& obj) {this->value /= obj;}
 
-    void operator = (const T& it) {this->value = it;}
+    void operator = (const T& obj) {this->value = obj;}
     operator T() const {return this->value;}
     friend std::ostream& operator << (std::ostream& out, const Delta<T>& obj) {return (out << obj.value);}
     friend void operator >> (std::istream& in, Delta<T>& obj) {in >> obj.value;}
