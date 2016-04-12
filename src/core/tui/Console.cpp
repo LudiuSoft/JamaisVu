@@ -50,23 +50,36 @@ void Console::print(const std::string& text) {
     std::cout << text;
 }
 
+<<<<<<< HEAD
 void Console::draw(const std::vector<std::u32string>& strings, const std::vector<Vector2<int>>& stringPositions,
+=======
+void Console::draw(const std::vector<std::u32string>& chars,
+>>>>>>> 1179772acbe62e1c81921d434c3d0a036568ff7c
                    const std::vector<std::vector<std::initializer_list<AnsiTextCode>>>& formats) {
 
 
     std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter; //Used to pass from u32string to bytes
+<<<<<<< HEAD
     assert(("Position vector size and string number don't match", strings.size() == stringPositions.size()));
     assert(("Format size and text size don't match", strings.size() == formats.size()));
+=======
 
-    for (int stringIndex = 0; stringIndex <= strings.size() - 1; stringIndex++)
+    assert(("Format size and text size don't match", chars.size() == formats.size()));
+>>>>>>> 1179772acbe62e1c81921d434c3d0a036568ff7c
+
+    for (int stringIndex = 0; stringIndex <= chars.size() - 1; stringIndex++)
     {
-        assert(("Format size and text size don't match",strings.at(stringIndex).size() == formats.at(stringIndex).size()));
+        assert(("Format size and text size don't match", chars.at(stringIndex).size() == formats.at(stringIndex).size()));
 
+<<<<<<< HEAD
         this->setCursorPosition(stringPositions.at(stringIndex));
         for (int charIndex = 0; charIndex <= strings.at(stringIndex).size() - 1; charIndex++)
+=======
+        for (int charIndex = 0; charIndex <= chars.at(stringIndex).size() - 1; charIndex++)
+>>>>>>> 1179772acbe62e1c81921d434c3d0a036568ff7c
         {
             this->setTextFormat(formats.at(stringIndex).at(charIndex));
-            std::cout << converter.to_bytes(strings.at(stringIndex).at(charIndex));
+            std::cout << converter.to_bytes(chars.at(stringIndex).at(charIndex));
             this->resetTextFormat();
         }
     }

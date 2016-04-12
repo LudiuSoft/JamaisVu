@@ -15,11 +15,14 @@ void end(int signum) {
     exit(signum);
 }
 
-int main() {
+int main()
+{
+    srand(time(NULL));     // Necessary for Neural network (you can use it instead of mt19937 too, if you want to)
     signal(SIGINT, end);
     std::cout << "\033[?25l";
     while (true)
     {
         tui.drawFrames();
     }
+    return 0;
 }

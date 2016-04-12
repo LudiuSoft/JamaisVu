@@ -9,15 +9,17 @@
 
 class Gene {
 private:
-    double fitness; //why the fuck is this here?
-/*
-    Neuron& input; //Why the fuck make them references?
-    Neuron& output;*/
+    // These neurons are pointers since the actual object is stored in the instance of the Genome.
+    Neuron* input;
+    Neuron* output;
 
     bool invert;
     double weight;
 public:
-    Gene();
+    Gene() {};
+    Gene(Neuron& input, Neuron& output);
+
+    void destroy();
 };
 
 

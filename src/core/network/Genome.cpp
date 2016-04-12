@@ -28,29 +28,43 @@ Genome::Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeu
 // ready for experiments.
 
 void Genome::mutate(double addRemoveMutation, double geneWeightMutation) {
-    const float deltaMutation = 0.6;
-    std::mt19937 rnd;
-    std::uniform_real_distribution<double> randomPreDivisionMutationDist;
+    const float deltaDistribution = 0.6;
 
     // Destroy neurons or genes
-    const double destroyNeuronProb = addRemoveMutation*2/100;
-    const double destroyGeneProb = addRemoveMutation*8/100;
+    const double destroyNeuronProb = addRemoveMutation * 2 / 100;
+    const double destroyGeneProb = addRemoveMutation * 15 / 100;
+
+    if (chance(destroyNeuronProb)) {
+        unsigned int neuronIndex = getRandomNeuronIndex();
+        neurons.at(neuronIndex).destroy();
+        neurons.erase(neurons.begin()+neuronIndex);
+    }
+
+    if (chance(destroyGeneProb)) {
+        unsigned int geneIndex = getRandomGeneIndex();
+        genes.at(geneIndex).destroy();
+        genes.erase(genes.begin()+geneIndex);
+    }
 
     // Create new neurons or genes
-    const double createNeuronProb = addRemoveMutation*5/100;
-    const double createGeneProb = addRemoveMutation*20/100;
+    const double createNeuronProb = addRemoveMutation * 5 / 100;
+    const double createGeneProb = addRemoveMutation * 20 / 100;
+
+    if (chance(createNeuronProb)) neurons.push_back(Neuron());
+
+    if (chance(createGeneProb)) {
+        // TODO: Modify Gene class so it receives input and output neuron in constructor
+        genes.push_back(Gene());
+    }
 
     // Modify gene weights
 
-    int geneAmount = (int)genes.size();
-    while (geneAmount != 0)
-    {
-        const double lowerLimit = geneWeightMutation *(1-deltaMutation);
-        const double upperLimit = geneWeightMutation *(1+deltaMutation);
+    int geneAmount = (int) genes.size();
+    while (geneAmount != 0) {
+        const double lowerLimit = geneWeightMutation * (1 - deltaDistribution);
+        const double upperLimit = geneWeightMutation * (1 + deltaDistribution);
 
-        rnd = std::mt19937((unsigned int)time(0));
-        randomPreDivisionMutationDist = std::uniform_real_distribution<double>(lowerLimit,upperLimit);
-        const double result = randomPreDivisionMutationDist(rnd)/geneAmount;
+        const double result = randDouble(lowerLimit, upperLimit) / geneAmount;
 
         geneAmount--;
         geneWeightMutation -= result;
@@ -73,4 +87,12 @@ Genome& Genome::operator=(const Genome& obj) {
     this->inputNeurons = obj.inputNeurons;
     this->outputNeurons = obj.outputNeurons;
     return *this;
+}
+
+unsigned int Genome::getRandomGeneIndex() {
+    return (unsigned int)(random0to1()*genes.size());
+}
+
+unsigned int Genome::getRandomNeuronIndex() {
+    return (unsigned int)(random0to1()*neurons.size());
 }
