@@ -6,6 +6,7 @@
 #define JAMAISVU_GENERATION_H
 
 #include "Species.h"
+#include "../util/Delta.h"
 #include <vector>
 
 class Generation {
@@ -26,7 +27,7 @@ public:
     std::vector<Neuron> getInputNeurons();
     std::vector<Neuron> getOutputNeurons();
 
-    void evolve(double addRemoveMutation, double geneWeightMutation);
+    void evolve(Delta<double> deltaMutation, double geneWeightMutation);
 };
 
 

@@ -27,12 +27,12 @@ Genome::Genome(std::vector<Neuron>& inputNeurons, std::vector<Neuron>& outputNeu
 // to the amount of genes if there are many, making the more weight change possibilities (due to more genes and neurons)
 // ready for experiments.
 
-void Genome::mutate(double addRemoveMutation, double geneWeightMutation) {
+void Genome::mutate(Delta<double> deltaMutation, double geneWeightMutation) {
     const float deltaDistribution = 0.6;
 
     // Destroy neurons or genes
-    const double destroyNeuronProb = addRemoveMutation * 2 / 100;
-    const double destroyGeneProb = addRemoveMutation * 15 / 100;
+    const double destroyNeuronProb = deltaMutation * 2 / 100;
+    const double destroyGeneProb = deltaMutation * 15 / 100;
 
     if (chance(destroyNeuronProb)) {
         unsigned int neuronIndex = getRandomNeuronIndex();
@@ -47,8 +47,8 @@ void Genome::mutate(double addRemoveMutation, double geneWeightMutation) {
     }
 
     // Create new neurons or genes
-    const double createNeuronProb = addRemoveMutation * 5 / 100;
-    const double createGeneProb = addRemoveMutation * 20 / 100;
+    const double createNeuronProb = deltaMutation * 5 / 100;
+    const double createGeneProb = deltaMutation * 20 / 100;
 
     if (chance(createNeuronProb)) neurons.push_back(Neuron());
 

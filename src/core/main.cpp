@@ -5,7 +5,10 @@
 #include "simulation/Simulation.h"
 #include "tui/Console.h"
 #include "tui/TUI.h"
+#include "util/randomUtil.h"
 #include <csignal>
+#include <chrono>
+#include <thread>
 
 TUI tui;
 
@@ -17,12 +20,9 @@ void end(int signum) {
 
 int main()
 {
-    srand(time(NULL));     // Necessary for Neural network (you can use it instead of mt19937 too, if you want to)
     signal(SIGINT, end);
-    std::cout << "\033[?25l";
-    while (true)
-    {
-        tui.drawFrames();
-    }
-    return 0;
+    std::cout << "\033[?25l" << std::endl;
+    tui.drawFrames();
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    end (0);
 }

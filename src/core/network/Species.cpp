@@ -26,10 +26,10 @@ void Species::setGenomeLimit(unsigned int limit)
     this->maxGenomes = limit;
 }
 
-void Species::evolve(double addRemoveMutation, double geneWeightMutation) {
+void Species::evolve(Delta<double> deltaMutation, double geneWeightMutation) {
     for (Genome genome : genomes)
     {
-        genome.mutate(addRemoveMutation, geneWeightMutation);
+        genome.mutate(deltaMutation, geneWeightMutation);
     }
 }
 

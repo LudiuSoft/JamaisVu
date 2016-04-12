@@ -19,11 +19,11 @@ Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecie
     }
 }
 
-void Generation::evolve(double addRemoveMutation, double geneWeightMutation)
+void Generation::evolve(Delta<double> deltaMutation, double geneWeightMutation)
 {
     for (Species uniqueSpecies : species)
     {
-        uniqueSpecies.evolve(addRemoveMutation, geneWeightMutation);
+        uniqueSpecies.evolve(deltaMutation, geneWeightMutation);
     }
 }
 

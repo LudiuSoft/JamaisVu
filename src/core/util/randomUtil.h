@@ -6,9 +6,14 @@
 #define JAMAISVU_RANDOMUTIL_H
 
 #include <stdlib.h>
+#include <random>
+
+static std::random_device rnddev;
 
 static const double random0to1() {
-    return ((double)rand() / (RAND_MAX + 1));
+    std::uniform_real_distribution<double> distribution (0,1);
+
+    return distribution(rnddev);
 }
 
 // PARAMETER SYNTAX

@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Gene.h"
+#include "../util/Delta.h"
 
 class Genome {
 private:
@@ -21,7 +22,7 @@ public:
     Genome(const Genome& obj);
 
     int fitness;
-    void mutate(double addRemoveMutation, double geneWeightMutation);
+    void mutate(Delta<double> deltaMutation, double geneWeightMutation);
 
     bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
     Genome& operator = (Genome&& obj);

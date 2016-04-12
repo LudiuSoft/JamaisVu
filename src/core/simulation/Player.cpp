@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include "Simulation.h"
+#include "../util/randomUtil.h"
 #include <chrono>
 
 Player::Player(Simulation& simulation) : simulation(simulation) {
@@ -38,9 +39,8 @@ void Player::setExhaustion(Delta<double> deltaExhaustion) {
 
 
 void Player::forage(double findFoodProbability, double findWaterProbability) { //TODO: Make method capture args from the simulation the player is in
-    std::uniform_real_distribution<double> foundSomethingDist (0,1);
-    bool foundFood  = (foundSomethingDist(rnd) <= findFoodProbability);
-    bool foundWater = (foundSomethingDist(rnd) <= findWaterProbability);
+    bool foundFood  = chance(findFoodProbability);
+    bool foundWater = chance(findWaterProbability);
 
     if (foundFood) {this->foodCount++;}
     if (foundWater) {this->waterCount++;}

@@ -23,16 +23,15 @@ public:
     bool operator >  (const T& it) const {return it >  this->value;}
     bool operator <  (const T& it) const {return it <  this->value;}
 
-    T& operator + (const T& it) const {return it + this->value;}
-    T& operator - (const T& it) const {return it - this->value;}
-    T& operator * (const T& it) const {return it * this->value;}
-    T& operator / (const T& it) const {return it / this->value;}
+    T operator + (const T& it) const {return it + this->value;}
+    T operator - (const T& it) const {return it - this->value;}
+    T operator * (const T& it) const {return it * this->value;}
+    T operator / (const T& it) const {return it / this->value;}
 
     void operator += (const T& it) {this->value += it;}
     void operator -= (const T& it) {this->value -= it;}
     void operator *= (const T& it) {this->value *= it;}
     void operator /= (const T& it) {this->value /= it;}
-
 
     void operator = (const T& it) {this->value = it;}
     operator T() const {return this->value;}
