@@ -22,7 +22,7 @@ public:
     Genome(const Genome& obj);
 
     int fitness;
-    void mutate(double addRemoveMutation, Delta<double> geneWeightMutation);
+    void mutate(double addRemoveMutation, Delta<double> geneWeightMutation, Delta<double> totalNeuronThresholdDelta);
 
     bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
     Genome& operator = (Genome&& obj);
@@ -30,6 +30,9 @@ public:
 
     unsigned int getRandomGeneIndex();
     unsigned int getRandomNeuronIndex();
+
+    std::list<Neuron*> getReceivableNeurons();
+    std::list<Neuron*> getSendableNeurons();
 };
 
 

@@ -27,7 +27,7 @@ Genome::Genome(std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons
 // to the amount of genes if there are many, making the more weight change possibilities (due to more genes and neurons)
 // ready for experiments.
 
-void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta) {
+void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta) {
     const float deltaDistribution = 0.6;
 
     // Destroy neurons or genes
@@ -58,15 +58,25 @@ void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
 
     if (chance(createNeuronProb)) neurons.push_back(Neuron());
 
+    std::list<Neuron *> receivableNeurons = getReceivableNeurons();   // Reason for early declaration - gets used later as well
     if (chance(createGeneProb)) {
-        // TODO: Modify Gene class so it receives input and output neuron in constructor
-        genes.push_back(Gene());
+        // TODO: Check for already existing connection
+        std::list<Neuron*> sendableNeurons = getSendableNeurons();
+        auto sndIt = sendableNeurons.begin();
+        std::advance(sndIt, (unsigned int)(sendableNeurons.size()*random0to1()));
+
+        auto rcvIt = receivableNeurons.begin();
+        std::advance(rcvIt, (unsigned int)(receivableNeurons.size()*random0to1()));
+
+        genes.push_back(Gene(**sndIt, **rcvIt));    // Sending neuron is the genes input, receiving neuron its output
     }
 
     // Modify gene weights
 
-    int geneAmount = (int) genes.size();
-    while (geneAmount != 0) {
+    int geneAmount = (unsigned int) genes.size();
+    auto geneIt = genes.begin();
+    while (geneAmount != 0)
+    {
         const double lowerLimit = totalGeneWeightDelta * (1 - deltaDistribution);
         const double upperLimit = totalGeneWeightDelta * (1 + deltaDistribution);
 
@@ -74,7 +84,28 @@ void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
 
         geneAmount--;
         totalGeneWeightDelta -= result;
-        // Apply result
+
+        geneIt->weight += (chance(0.5)?-1:1)*result;    // 50% chance on subtraction / addition of result
+        if (chance(0.05*networkChangeFactor)) geneIt->invert = !geneIt->invert; // Usually, it's unlikely a gene changes its inverting behaviour(5*ncF%).
+
+        std::advance(geneIt, 1);        // Equal to geneIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
+    }
+
+    int thresholdMutatableNeuronAmount = (unsigned int) receivableNeurons.size();
+    auto neuronIt = receivableNeurons.begin();
+    while (thresholdMutatableNeuronAmount != 0)
+    {
+        const double lowerLimit = totalNeuronThresholdDelta * (1 - deltaDistribution);
+        const double upperLimit = totalNeuronThresholdDelta * (1 + deltaDistribution);
+
+        const double result = randomValueFromInterval(lowerLimit, upperLimit) / thresholdMutatableNeuronAmount;
+
+        thresholdMutatableNeuronAmount--;
+        totalNeuronThresholdDelta -= result;
+
+        (*neuronIt)->threshold += (chance(0.5)?-1:1)*result;    // 50% chance on subtraction / addition of result
+
+        std::advance(neuronIt, 1);        // Equal to neuronIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
     }
 }
 
@@ -84,6 +115,7 @@ Genome& Genome::operator=(Genome&& obj) {
     this->inputNeurons = std::move(obj.inputNeurons);
     this->outputNeurons = std::move(obj.outputNeurons);
     this->fitness = std::move(obj.fitness);
+    return *this;
 }
 
 Genome& Genome::operator=(const Genome& obj) {
@@ -101,4 +133,42 @@ unsigned int Genome::getRandomGeneIndex() {
 
 unsigned int Genome::getRandomNeuronIndex() {
     return (unsigned int)(random0to1()*neurons.size());
+}
+
+std::list<Neuron *> Genome::getReceivableNeurons() {
+    std::list<Neuron*> resultContainer;
+
+    auto rcvIt = outputNeurons.begin();
+    while (rcvIt != outputNeurons.end())
+    {
+        resultContainer.push_back(&*rcvIt);  // Literally - Your assumption about what this line does is probably right.
+        std::advance(rcvIt, 1);
+    }
+
+    rcvIt = neurons.begin();
+    while (rcvIt != neurons.end())
+    {
+        resultContainer.push_back(&*rcvIt);
+        std::advance(rcvIt, 1);
+    }
+    return resultContainer;
+}
+
+std::list<Neuron *> Genome::getSendableNeurons() {
+    std::list<Neuron*> resultContainer;
+
+    auto rcvIt = inputNeurons.begin();
+    while (rcvIt != inputNeurons.end())
+    {
+        resultContainer.push_back(&*rcvIt);
+        std::advance(rcvIt, 1);
+    }
+
+    rcvIt = neurons.begin();
+    while (rcvIt != neurons.end())
+    {
+        resultContainer.push_back(&*rcvIt);
+        std::advance(rcvIt, 1);
+    }
+    return resultContainer;
 }

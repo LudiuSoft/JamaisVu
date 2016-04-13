@@ -20,12 +20,16 @@ private:
 public:
     Neuron() {};
 
+    double threshold;
+
     unsigned long long int getGeneAmount();
 
     void receiveFrom(Gene* inputGene);
     void sendTo(Gene* to);
 
     void destroy();
+
+    void pulse(double data);
 
     bool disconnectGene(Gene* gene);
     Gene* disconnectGene();             // Disconnects random gene

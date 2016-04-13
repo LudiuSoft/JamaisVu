@@ -12,14 +12,16 @@ private:
     // These neurons are pointers since the actual object is stored in the instance of the Genome.
     Neuron* input;
     Neuron* output;
-
-    bool invert;
-    double weight;
 public:
     Gene() {};
     Gene(Neuron& input, Neuron& output);
 
+    bool invert;
+    double weight;
+
     void destroy();
+
+    void pulse(double data);
 };
 
 
