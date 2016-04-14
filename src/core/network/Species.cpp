@@ -25,10 +25,10 @@ void Species::setGenomeLimit(unsigned int limit)
     this->maxGenomes = limit;
 }
 
-void Species::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta) {
+void Species::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta) {
     for (Genome genome : genomes)
     {
-        genome.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta);
+        genome.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta);
     }
 }
 

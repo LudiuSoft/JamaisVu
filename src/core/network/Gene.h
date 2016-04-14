@@ -19,6 +19,9 @@ public:
     bool invert;
     double weight;
 
+    Neuron* getInputNeuron();
+    Neuron* getOutputNeuron();
+
     void destroy();
 
     void pulse(double data);

@@ -24,7 +24,7 @@ public:
     std::vector<Genome> getBestGenomes(unsigned int amount);
     std::vector<Genome> getBestGenomes(double percentage);
 
-    void evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta);
+    void evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta);
 };
 
 

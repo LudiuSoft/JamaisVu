@@ -5,6 +5,11 @@
 #include "Neuron.h"
 #include "Gene.h"
 
+Neuron::Neuron() {
+    threshold = 1.0;
+    signalStrength = 0.5;
+}
+
 void Neuron::receiveFrom(Gene* inputGene){
     inputGenes.push_back(inputGene);
 }
@@ -49,18 +54,52 @@ Gene* Neuron::disconnectGene() {
 }
 
 unsigned long long int Neuron::getGeneAmount() {
-    return inputGenes.size()+outputGenes.size();
+    return inputGenes.size() + outputGenes.size();
 }
 
 void Neuron::destroy() {
-    unsigned int size = (unsigned int)inputGenes.size();
-    while (size!=0) {
+    unsigned int size = (unsigned int) inputGenes.size();
+    while (size != 0) {
         size--;
         inputGenes.at(size)->destroy();
     }
-    size = (unsigned int)outputGenes.size();
-    while (size!=0) {
+    size = (unsigned int) outputGenes.size();
+    while (size != 0) {
         size--;
         outputGenes.at(size)->destroy();
     }
+}
+
+bool Neuron::containsConnectionFrom(Neuron &inputNeuron) {
+    for (Gene *gene : inputGenes) {
+        if (gene->getInputNeuron() == &inputNeuron)
+            return true;
+    }
+    return false;
+}
+
+bool Neuron::containsConnectionTo(Neuron &outputNeuron) {
+    for (Gene *gene : outputGenes) {
+        if (gene->getOutputNeuron() == &outputNeuron)
+            return true;
+    }
+    return false;
+}
+
+void Neuron::pulse(double data) {
+    if (data > threshold) return;   // Avoids circular network circles
+    this->data += data;
+    if (data > threshold) {         // Bigger than threshold, fires signal to all outputGenes
+        for (Gene* gene : outputGenes) {
+            gene->pulse(signalStrength);
+        }
+    }
+}
+
+void Neuron::resetData() {
+    data = 0;
+}
+
+double Neuron::getSendingSignalStrength() {
+    return data>threshold?signalStrength:0;
 }

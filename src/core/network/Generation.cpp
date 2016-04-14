@@ -19,11 +19,11 @@ Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecie
     }
 }
 
-void Generation::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta)
+void Generation::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta)
 {
     for (Species uniqueSpecies : species)
     {
-        uniqueSpecies.evolve(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta);
+        uniqueSpecies.evolve(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta);
     }
 }
 

@@ -25,7 +25,7 @@ public:
     std::vector<Neuron> getInputNeurons();
     std::vector<Neuron> getOutputNeurons();
 
-    void evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta);
+    void evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta);
 };
 
 
