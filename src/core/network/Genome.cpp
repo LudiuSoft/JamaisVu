@@ -12,7 +12,7 @@ Genome::Genome(const Genome &obj) {
     this->outputNeurons = obj.outputNeurons;
 }
 
-Genome::Genome(std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons) {
+Genome::Genome(std::list<Neuron> inputNeurons, std::list<Neuron> outputNeurons) {
     this->inputNeurons = inputNeurons;
     this->outputNeurons = outputNeurons;
 }
@@ -27,7 +27,7 @@ Genome::Genome(std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons
 // to the amount of genes if there are many, making the more weight change possibilities (due to more genes and neurons)
 // ready for experiments.
 
-void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
+int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
                     Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta) {
     const float deltaDistribution = 0.6;
 
@@ -117,6 +117,8 @@ void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
 
         std::advance(neuronIt, 1); // Equal to neuronIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
     }
+
+    return &fitness;
 }
 
 Genome& Genome::operator=(Genome&& obj) {
@@ -181,4 +183,10 @@ std::list<Neuron *> Genome::getSendableNeurons() {
         std::advance(rcvIt, 1);
     }
     return resultContainer;
+}
+
+void Genome::clearNetworkData() {
+    for (Neuron neuron : inputNeurons) {
+        neuron.resetData();
+    }
 }

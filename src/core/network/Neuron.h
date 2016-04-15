@@ -13,6 +13,7 @@ class Gene;     // Guess this works (?)
 class Neuron {
 private:
     double data;    // Temporary for each "round" a genome has to live through
+    bool cleared;
 
     std::vector<Gene*> inputGenes;
     std::vector<Gene*> outputGenes;
@@ -59,11 +60,8 @@ public:
      * to each piece to give them the possibility to try around the tiniest changes in the network before messing it up
      * (A network with 400 genes has many possibilities it has to test through mutationwise, a network with 3 genes doesn't!)
      *
-     * 3. Send a reset signal from each Input neuron, they send it through to all neurons they fired to, which give it further etc.
-     * The output neurons will be reset automatically that way.
      *
-     *
-     * DO STEPS 2 AND 3 EVERYTIME YOU EXPECT AN ACTION FROM THE NEURAL NETWORK AND ONLY WHEN YOU CAN FEED ALL INPUT NEURONS
+     * DO STEP 2 EVERYTIME YOU EXPECT AN ACTION FROM THE NEURAL NETWORK AND ONLY WHEN YOU CAN FEED ALL INPUT NEURONS
      * WITH INFORMATION
      */
 

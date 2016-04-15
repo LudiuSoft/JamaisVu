@@ -2,7 +2,9 @@
 // Created by IPat (Local) on 28.03.2016.
 //
 
+#include <iostream>
 #include "Generation.h"
+#include "../util/toStr.h"
 
 Generation::Generation() {
 
@@ -19,12 +21,11 @@ Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecie
     }
 }
 
-void Generation::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta)
-{
-    for (Species uniqueSpecies : species)
-    {
-        uniqueSpecies.evolve(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta);
-    }
+int* Generation::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
+                        Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta,
+                        unsigned int indexSpecies, unsigned int indexGenomes) {
+
+    return species.at(indexSpecies).evolve(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta, indexGenomes);
 }
 
 void Generation::setInputNeurons(std::vector<Neuron> &input) {
@@ -41,4 +42,13 @@ std::vector<Neuron> Generation::getInputNeurons() {
 
 std::vector<Neuron> Generation::getOutputNeurons() {
     return *outputNeurons;
+}
+
+void Generation::nextGen() {
+    std::cout << "GENERATION " << toStr(generation) << ":" << std::endl << std::endl;
+    for (unsigned int a = 0; a < species.size(); a++) {
+        std::cout << "Species " << toStr(a + 1) << ": " << toStr(species.at(a).getAverageFitness()) << std::endl;
+        species.at(a).nextGen(0.2);
+    }
+    generation++;
 }

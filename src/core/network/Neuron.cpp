@@ -6,6 +6,8 @@
 #include "Gene.h"
 
 Neuron::Neuron() {
+    data = 0.0;
+    cleared = false;
     threshold = 1.0;
     signalStrength = 0.5;
 }
@@ -87,6 +89,7 @@ bool Neuron::containsConnectionTo(Neuron &outputNeuron) {
 }
 
 void Neuron::pulse(double data) {
+    if (cleared) cleared = false;
     if (data > threshold) return;   // Avoids circular network circles
     this->data += data;
     if (data > threshold) {         // Bigger than threshold, fires signal to all outputGenes
@@ -97,7 +100,12 @@ void Neuron::pulse(double data) {
 }
 
 void Neuron::resetData() {
-    data = 0;
+    data = 0.0;
+    cleared = true;
+    for (Gene* gene : outputGenes) {
+        if (!gene->getOutputNeuron()->cleared)
+            gene->getOutputNeuron()->resetData();
+    }
 }
 
 double Neuron::getSendingSignalStrength() {

@@ -25,11 +25,9 @@ void Species::setGenomeLimit(unsigned int limit)
     this->maxGenomes = limit;
 }
 
-void Species::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta) {
-    for (Genome genome : genomes)
-    {
-        genome.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta);
-    }
+int* Species::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
+                     Delta<double> totalNeuronSignalStrengthDelta, unsigned int indexGenome) {
+    return genomes.at(indexGenome).mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta);
 }
 
 std::vector<Genome> Species::getBestGenomes(double percentage)
@@ -45,3 +43,23 @@ std::vector<Genome> Species::getBestGenomes(unsigned int amount)
     return genomesCopy;
 }
 
+double Species::getAverageFitness() {
+    int allFitness = 0;
+    int divisor = 0;
+    for (Genome genome : genomes) {
+        allFitness += genome.fitness;
+        divisor++;
+    }
+    if (divisor==0) divisor++;
+    return allFitness / divisor;
+}
+
+// 0 < bestOfPercentage < 0.5
+void Species::nextGen(double bestOfPercentage) {
+    std::sort(genomes.begin(), genomes.end(), std::greater<Genome>());
+    int bestGenomesAmount = (int)(genomes.size() * bestOfPercentage);
+    genomes.erase(genomes.end()-bestGenomesAmount, genomes.end());
+    for (unsigned int a = 0; a<bestGenomesAmount; a++) {
+        genomes.push_back(genomes.at(a));
+    }
+}
