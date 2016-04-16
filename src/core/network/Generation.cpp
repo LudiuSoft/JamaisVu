@@ -45,9 +45,8 @@ std::vector<Neuron> Generation::getOutputNeurons() {
 }
 
 void Generation::nextGen() {
-    std::cout << "GENERATION " << toStr(generation) << ":" << std::endl << std::endl;
     for (unsigned int a = 0; a < species.size(); a++) {
-        std::cout << "Species " << toStr(a + 1) << ": " << toStr(species.at(a).getAverageFitness()) << std::endl;
+        std::cout << "Species " << toStr(a + 1) << " Average Fitness: " << toStr(species.at(a).getAverageFitness()) << std::endl;
         species.at(a).nextGen(0.2);
     }
     generation++;

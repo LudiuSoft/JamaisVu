@@ -20,7 +20,7 @@ void Neuron::sendTo(Gene* outputGene) {
     outputGenes.push_back(outputGene);
 }
 
-bool Neuron::deleteInputGene(Gene *gene) {
+bool Neuron::deleteInputGene(Gene* gene) {
     auto it = std::find(inputGenes.begin(), inputGenes.end(), gene);
     if (it != inputGenes.end()) {
         inputGenes.erase(it);

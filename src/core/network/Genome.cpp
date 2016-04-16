@@ -13,6 +13,9 @@ Genome::Genome(const Genome &obj) {
 }
 
 Genome::Genome(std::list<Neuron> inputNeurons, std::list<Neuron> outputNeurons) {
+    genes = std::list<Gene>();
+    neurons = std::list<Neuron>();
+
     this->inputNeurons = inputNeurons;
     this->outputNeurons = outputNeurons;
 }
@@ -35,16 +38,7 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
     const double destroyNeuronProb = networkChangeFactor * 2 / 100;
     const double destroyGeneProb = networkChangeFactor * 15 / 100;
 
-    if (chance(destroyNeuronProb)) {
-        unsigned int neuronIndex = getRandomNeuronIndex();
-        auto neuronsIterator = neurons.begin();
-        std::advance(neuronsIterator, neuronIndex);
-
-        neuronsIterator->destroy();
-        neurons.erase(neuronsIterator);
-    }
-
-    if (chance(destroyGeneProb)) {
+    if (chance(destroyGeneProb)&&genes.size()!=0) {
         unsigned int geneIndex = getRandomGeneIndex();
         auto genesIterator = genes.begin();
         std::advance(genesIterator, geneIndex);
@@ -53,11 +47,18 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
         genes.erase(genesIterator);
     }
 
+    if (chance(destroyNeuronProb)&&neurons.size()!=0) {
+        unsigned int neuronIndex = getRandomNeuronIndex();
+        auto neuronsIterator = neurons.begin();
+        std::advance(neuronsIterator, neuronIndex);
+
+        neuronsIterator->destroy();
+        neurons.erase(neuronsIterator);
+    }
+
     // Create new neurons or genes
     const double createNeuronProb = networkChangeFactor * 5 / 100;
     const double createGeneProb = networkChangeFactor * 25 / 100;
-
-    if (chance(createNeuronProb)) neurons.push_back(Neuron());  // Neuron gets created
 
     std::list<Neuron *> receivableNeurons = getReceivableNeurons();   // Reason for early declaration: Gets used multiple times
 
@@ -69,9 +70,15 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
         auto rcvIt = receivableNeurons.begin();
         std::advance(rcvIt, (unsigned int)(receivableNeurons.size()*random0to1()));
 
+        Neuron checkSnd = **sndIt;
+        Neuron checkRcv = **rcvIt;
+
         if (!((*sndIt)->containsConnectionFrom(**rcvIt) || (*rcvIt)->containsConnectionTo(**sndIt)))
             genes.push_back(Gene(**sndIt, **rcvIt));
+
     }
+
+    if (chance(createNeuronProb)) neurons.push_back(Neuron());  // Neuron gets created
 
     // Modify gene weights
     int geneAmount = (unsigned int) genes.size();
@@ -88,7 +95,7 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
 
         geneIt->weight += (chance(0.5)?-1:1)*result;    // 50% chance on subtraction / addition of result
         if (chance(0.1*networkChangeFactor)) geneIt->invert = !geneIt->invert; // Usually, it's unlikely a gene changes its inverting behaviour(5*ncF%).
-
+        // Weird, this line gets reached at the first approach even though geneAmount is 0
         std::advance(geneIt, 1);      // Equal to geneIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
     }
 

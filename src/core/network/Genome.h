@@ -11,9 +11,9 @@
 
 class Genome {
 private:
+public:
     std::list<Gene> genes;
     std::list<Neuron> neurons;
-public:
     Genome() {};
     Genome(std::list<Neuron> inputNeurons, std::list<Neuron> outputNeurons);
     Genome(const Genome& obj);
@@ -21,7 +21,7 @@ public:
     std::list<Neuron> inputNeurons;
     std::list<Neuron> outputNeurons;
 
-    int fitness;
+    int fitness = 0;
     int* mutate(double addRemoveMutation, Delta<double> geneWeightMutation, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta);
 
     bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
