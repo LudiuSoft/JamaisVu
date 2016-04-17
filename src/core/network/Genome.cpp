@@ -41,6 +41,7 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
     if (chance(destroyGeneProb)&&genes.size()!=0) {
         unsigned int geneIndex = getRandomGeneIndex();
         auto genesIterator = genes.begin();
+
         std::advance(genesIterator, geneIndex);
 
         genesIterator->destroy();
@@ -50,6 +51,7 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
     if (chance(destroyNeuronProb)&&neurons.size()!=0) {
         unsigned int neuronIndex = getRandomNeuronIndex();
         auto neuronsIterator = neurons.begin();
+
         std::advance(neuronsIterator, neuronIndex);
 
         neuronsIterator->destroy();

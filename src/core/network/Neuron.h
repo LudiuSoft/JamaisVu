@@ -6,7 +6,7 @@
 #define JAMAISVU_NEURON_H
 
 #include "../util/randomUtil.h"
-#include <vector>
+#include <list>
 #include <algorithm>
 
 class Gene;     // Guess this works (?)
@@ -15,8 +15,8 @@ private:
     double data;    // Temporary for each "round" a genome has to live through
     bool cleared;
 
-    std::vector<Gene*> inputGenes;
-    std::vector<Gene*> outputGenes;
+    std::list<Gene*> inputGenes;
+    std::list<Gene*> outputGenes;
 
     bool deleteInputGene(Gene* gene);
     bool deleteOutputGene(Gene* gene);
@@ -82,7 +82,6 @@ public:
     void pulse(double data);
 
     bool disconnectGene(Gene* gene);
-    Gene* disconnectGene();             // Disconnects random gene
 
     double getSendingSignalStrength();
 };

@@ -37,6 +37,12 @@ void runNetworkTest1() {
     while (testGen.generation != 100) {
         for (unsigned int a = 0; a < speciesPerGen; a++) {
             for (unsigned int b = 0; b < genomesPerSpecies; b++) {
+                std::cout << "G" << toStr(testGen.generation);
+                std::cout << "S" << toStr(a+1);
+                std::cout << "G" << toStr(b+1) << ": \n";
+
+                for (Neuron neuron : testGen.species.at(a).genomes.at(b).neurons)
+                    std::cout << "GeneAmount: " <<  toStr(neuron.getGeneAmount()) << std::endl;
                 // The lower the stronger
                 double hunger = 2.0;
                 // The lower the...less
@@ -70,10 +76,7 @@ void runNetworkTest1() {
                     round++;
                 }
                 *fitness = round;
-                std::cout << "G" << toStr(testGen.generation);
-                std::cout << "S" << toStr(a+1);
-                std::cout << "G" << toStr(b+1);
-                std::cout << ": " << toStr(*fitness) << std::endl;
+                std::cout << toStr(*fitness) << std::endl;
             }
         }
         testGen.nextGen();

@@ -6,6 +6,8 @@
 #include "Gene.h"
 
 Neuron::Neuron() {
+    inputGenes, outputGenes = std::list<Gene*>();
+
     data = 0.0;
     cleared = false;
     threshold = 1.0;
@@ -20,7 +22,9 @@ void Neuron::sendTo(Gene* outputGene) {
     outputGenes.push_back(outputGene);
 }
 
+// TODO: READ TODO BELOW
 bool Neuron::deleteInputGene(Gene* gene) {
+    auto test = inputGenes.begin();
     auto it = std::find(inputGenes.begin(), inputGenes.end(), gene);
     if (it != inputGenes.end()) {
         inputGenes.erase(it);
@@ -38,21 +42,10 @@ bool Neuron::deleteOutputGene(Gene *gene) {
         return false;
 }
 
+// TODO (BUG): inputGenes and outputGenes try to get read at this point, somehow they get messed up somewhere
+// The iterators of .begin() and end() are messed up, the list itself is filled with enormous amounts of data
 bool Neuron::disconnectGene(Gene* gene) {
     return deleteInputGene(gene) || deleteOutputGene(gene);
-}
-
-Gene* Neuron::disconnectGene() {
-    unsigned int pointer = (unsigned int) (random0to1() * getGeneAmount());
-    Gene *toReturn;
-    if (pointer < inputGenes.size()) {
-        toReturn = inputGenes.at(pointer);
-        inputGenes.erase(inputGenes.begin() + pointer);
-    } else {
-        toReturn = outputGenes.at(pointer - inputGenes.size());
-        outputGenes.erase(outputGenes.begin() + (pointer - inputGenes.size()));
-    }
-    return toReturn;
 }
 
 unsigned long long int Neuron::getGeneAmount() {
@@ -60,15 +53,15 @@ unsigned long long int Neuron::getGeneAmount() {
 }
 
 void Neuron::destroy() {
-    unsigned int size = (unsigned int) inputGenes.size();
-    while (size != 0) {
-        size--;
-        inputGenes.at(size)->destroy();
+    auto geneIterator = inputGenes.begin();
+    while (inputGenes.size() != 0 && geneIterator != inputGenes.end()) {
+        (*geneIterator)->destroy();
+        std::advance(geneIterator, 1);
     }
-    size = (unsigned int) outputGenes.size();
-    while (size != 0) {
-        size--;
-        outputGenes.at(size)->destroy();
+    geneIterator = outputGenes.begin();
+    while (outputGenes.size() != 0 && geneIterator != outputGenes.end()) {
+        (*geneIterator)->destroy();
+        std::advance(geneIterator, 1);
     }
 }
 
