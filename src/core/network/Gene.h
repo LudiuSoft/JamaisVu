@@ -5,8 +5,7 @@
 #ifndef JAMAISVU_GENE_H
 #define JAMAISVU_GENE_H
 
-#include "Neuron.h"
-
+class Neuron;
 class Gene {
 private:
     // These neurons are pointers since the actual object is stored in the instance of the Genome.

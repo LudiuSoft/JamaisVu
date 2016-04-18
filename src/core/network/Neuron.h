@@ -6,10 +6,10 @@
 #define JAMAISVU_NEURON_H
 
 #include "../util/randomUtil.h"
+#include "Gene.h"
 #include <list>
 #include <algorithm>
 
-class Gene;     // Guess this works (?)
 class Neuron {
 private:
     double data;    // Temporary for each "round" a genome has to live through

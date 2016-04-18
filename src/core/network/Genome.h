@@ -6,7 +6,7 @@
 #define JAMAISVU_GENOME_H
 
 #include <list>
-#include "Gene.h"
+#include "Neuron.h"
 #include "../util/Delta.h"
 
 class Genome {
@@ -24,9 +24,10 @@ public:
     int fitness = 0;
     int* mutate(double addRemoveMutation, Delta<double> geneWeightMutation, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta);
 
-    bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
+    /*bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
+    int operator- (const Genome& g1) const { return (fitness - g1.fitness); }
     Genome& operator = (Genome&& obj);
-    Genome& operator = (const Genome& obj);
+    Genome& operator = (const Genome& obj);*/
 
     unsigned int getRandomGeneIndex();
     unsigned int getRandomNeuronIndex();

@@ -3,7 +3,6 @@
 //
 
 #include "Neuron.h"
-#include "Gene.h"
 
 Neuron::Neuron() {
     inputGenes, outputGenes = std::list<Gene*>();
@@ -24,6 +23,7 @@ void Neuron::sendTo(Gene* outputGene) {
 
 // TODO: READ TODO BELOW
 bool Neuron::deleteInputGene(Gene* gene) {
+    int size = inputGenes.size();
     auto test = inputGenes.begin();
     auto it = std::find(inputGenes.begin(), inputGenes.end(), gene);
     if (it != inputGenes.end()) {

@@ -3,6 +3,7 @@
 //
 
 #include "Gene.h"
+#include "Neuron.h"
 
 Gene::Gene(Neuron& input, Neuron& output)
 {

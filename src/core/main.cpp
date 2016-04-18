@@ -41,8 +41,10 @@ void runNetworkTest1() {
                 std::cout << "S" << toStr(a+1);
                 std::cout << "G" << toStr(b+1) << ": \n";
 
-                for (Neuron neuron : testGen.species.at(a).genomes.at(b).neurons)
-                    std::cout << "GeneAmount: " <<  toStr(neuron.getGeneAmount()) << std::endl;
+                auto it1 = testGen.species.begin();
+                std::advance(it1, a);
+                auto it2 = (*it1).genomes.begin();
+                std::advance(it2, b);
                 // The lower the stronger
                 double hunger = 2.0;
                 // The lower the...less
@@ -59,12 +61,12 @@ void runNetworkTest1() {
                     food += 0.3 * foodFactor;
                     foodFactor *= 1.2;
 
-                    auto it = testGen.species.at(a).genomes.at(b).inputNeurons.begin();
-                    it->pulse(hunger);
-                    std::advance(it, 1);
-                    it->pulse(food);
+                    auto it3 = (*it2).inputNeurons.begin();
+                    it3->pulse(hunger);
+                    std::advance(it3, 1);
+                    it3->pulse(food);
 
-                    double signal = testGen.species.at(a).genomes.at(b).outputNeurons.begin()->getSendingSignalStrength();
+                    double signal = (*it2).outputNeurons.begin()->getSendingSignalStrength();
                     if (signal != 0.0) {
                         hunger += signal;
                         if (signal>food) signal = food;
@@ -90,6 +92,7 @@ int main()
     tui.drawFrames();
     std::cout << std::endl << "Starting networkTest1()..." << std::endl;
     runNetworkTest1();
+    std::cout << "Finished successfully." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(15));
     end (0);
 }

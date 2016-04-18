@@ -129,7 +129,7 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
 
     return &fitness;
 }
-
+/*
 Genome& Genome::operator=(Genome&& obj) {
     this->genes = std::move(obj.genes);
     this->neurons = std::move(obj.neurons);
@@ -146,7 +146,7 @@ Genome& Genome::operator=(const Genome& obj) {
     this->inputNeurons = obj.inputNeurons;
     this->outputNeurons = obj.outputNeurons;
     return *this;
-}
+}*/
 
 unsigned int Genome::getRandomGeneIndex() {
     return (unsigned int)(random0to1()*genes.size());

@@ -14,16 +14,18 @@ class Species {
 private:
     unsigned int maxGenomes;
 public:
-    std::vector<Genome> genomes;
+    std::list<Genome> genomes;
 
     Species() {};
     Species(unsigned int limit, std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons);
-    Species(std::vector<Genome> genomes);
+    Species(std::list<Genome> genomes);
 
     void setGenomeLimit(unsigned int limit);
 
-    std::vector<Genome> getBestGenomes(unsigned int amount);
-    std::vector<Genome> getBestGenomes(double percentage);
+    void sortGenomeList(std::list<Genome> &genomeList);
+
+    std::list<Genome> getBestGenomes(unsigned int amount);
+    std::list<Genome> getBestGenomes(double percentage);
 
     int* evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
                 Delta<double> totalNeuronSignalStrengthDelta, unsigned int indexGenome);
