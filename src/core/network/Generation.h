@@ -11,21 +11,26 @@
 
 class Generation {
 private:
-    std::vector<Species> species;
-
-    std::vector<Neuron>* inputNeurons;
-    std::vector<Neuron>* outputNeurons;
+    std::list<Neuron>* inputNeurons;
+    std::list<Neuron>* outputNeurons;
 public:
+    int generation = 1;
+
+    std::list<Species> species;
+
     Generation();
     Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecies, std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons);
 
-    void setInputNeurons(std::vector<Neuron>& input);
-    void setOutputNeurons(std::vector<Neuron>& output);
+    void setInputNeurons(std::list<Neuron>& input);
+    void setOutputNeurons(std::list<Neuron>& output);
 
-    std::vector<Neuron> getInputNeurons();
-    std::vector<Neuron> getOutputNeurons();
+    std::list<Neuron> getInputNeurons();
+    std::list<Neuron> getOutputNeurons();
 
-    void evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta);
+    int* mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
+               Delta<double> totalNeuronSignalStrengthDelta, unsigned int indexSpecies, unsigned int indexGenomes);
+
+    void nextGen();
 };
 
 

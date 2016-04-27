@@ -12,7 +12,10 @@ Genome::Genome(const Genome &obj) {
     this->outputNeurons = obj.outputNeurons;
 }
 
-Genome::Genome(std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons) {
+Genome::Genome(std::list<Neuron> inputNeurons, std::list<Neuron> outputNeurons) {
+    genes = std::list<Gene>();
+    neurons = std::list<Neuron>();
+
     this->inputNeurons = inputNeurons;
     this->outputNeurons = outputNeurons;
 }
@@ -27,40 +30,41 @@ Genome::Genome(std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons
 // to the amount of genes if there are many, making the more weight change possibilities (due to more genes and neurons)
 // ready for experiments.
 
-void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta) {
+int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
+                    Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta) {
     const float deltaDistribution = 0.6;
 
     // Destroy neurons or genes
     const double destroyNeuronProb = networkChangeFactor * 2 / 100;
     const double destroyGeneProb = networkChangeFactor * 15 / 100;
 
-    if (chance(destroyNeuronProb)) {
-        unsigned int neuronIndex = getRandomNeuronIndex();
-        auto neuronsIterator = neurons.begin();
-        std::advance(neuronsIterator, neuronIndex);
-
-        neuronsIterator->destroy();
-        neurons.erase(neuronsIterator);
-    }
-
-    if (chance(destroyGeneProb)) {
+    if (chance(destroyGeneProb)&&genes.size()!=0) {
         unsigned int geneIndex = getRandomGeneIndex();
         auto genesIterator = genes.begin();
+
         std::advance(genesIterator, geneIndex);
 
         genesIterator->destroy();
         genes.erase(genesIterator);
     }
 
+    if (chance(destroyNeuronProb)&&neurons.size()!=0) {
+        unsigned int neuronIndex = getRandomNeuronIndex();
+        auto neuronsIterator = neurons.begin();
+
+        std::advance(neuronsIterator, neuronIndex);
+
+        neuronsIterator->destroy();
+        neurons.erase(neuronsIterator);
+    }
+
     // Create new neurons or genes
     const double createNeuronProb = networkChangeFactor * 5 / 100;
-    const double createGeneProb = networkChangeFactor * 20 / 100;
+    const double createGeneProb = networkChangeFactor * 25 / 100;
 
-    if (chance(createNeuronProb)) neurons.push_back(Neuron());
+    std::list<Neuron *> receivableNeurons = getReceivableNeurons();   // Reason for early declaration: Gets used multiple times
 
-    std::list<Neuron *> receivableNeurons = getReceivableNeurons();   // Reason for early declaration - gets used later as well
-    if (chance(createGeneProb)) {
-        // TODO: Check for already existing connection
+    if (chance(createGeneProb)) {                               // Gene gets created
         std::list<Neuron*> sendableNeurons = getSendableNeurons();
         auto sndIt = sendableNeurons.begin();
         std::advance(sndIt, (unsigned int)(sendableNeurons.size()*randomValueFromInterval(double(0.0), double(1.0))));
@@ -68,11 +72,17 @@ void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
         auto rcvIt = receivableNeurons.begin();
         std::advance(rcvIt, (unsigned int)(receivableNeurons.size()*randomValueFromInterval(double(0.0), double(1.0))));
 
-        genes.push_back(Gene(**sndIt, **rcvIt));    // Sending neuron is the genes input, receiving neuron its output
+        Neuron checkSnd = **sndIt;
+        Neuron checkRcv = **rcvIt;
+
+        if (!((*sndIt)->containsConnectionFrom(**rcvIt) || (*rcvIt)->containsConnectionTo(**sndIt)))
+            genes.push_back(Gene(**sndIt, **rcvIt));
+
     }
 
-    // Modify gene weights
+    if (chance(createNeuronProb)) neurons.push_back(Neuron());  // Neuron gets created
 
+    // Modify gene weights
     int geneAmount = (unsigned int) genes.size();
     auto geneIt = genes.begin();
     while (geneAmount != 0)
@@ -86,29 +96,40 @@ void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
         totalGeneWeightDelta -= result;
 
         geneIt->weight += (chance(0.5)?-1:1)*result;    // 50% chance on subtraction / addition of result
-        if (chance(0.05*networkChangeFactor)) geneIt->invert = !geneIt->invert; // Usually, it's unlikely a gene changes its inverting behaviour(5*ncF%).
-
-        std::advance(geneIt, 1);        // Equal to geneIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
+        if (chance(0.1*networkChangeFactor)) geneIt->invert = !geneIt->invert; // Usually, it's unlikely a gene changes its inverting behaviour(5*ncF%).
+        // Weird, this line gets reached at the first approach even though geneAmount is 0
+        std::advance(geneIt, 1);      // Equal to geneIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
     }
 
-    int thresholdMutatableNeuronAmount = (unsigned int) receivableNeurons.size();
+    // Modify neuron threshold and signal values
+    int mutatableNeuronAmount = (unsigned int) receivableNeurons.size();
     auto neuronIt = receivableNeurons.begin();
-    while (thresholdMutatableNeuronAmount != 0)
-    {
-        const double lowerLimit = totalNeuronThresholdDelta * (1 - deltaDistribution);
-        const double upperLimit = totalNeuronThresholdDelta * (1 + deltaDistribution);
+    while (mutatableNeuronAmount != 0) {
+        const double lowerThreshholdDeltaLimit = totalNeuronThresholdDelta * (1 - deltaDistribution);
+        const double upperThreshholdDeltaLimit = totalNeuronThresholdDelta * (1 + deltaDistribution);
 
-        const double result = randomValueFromInterval(lowerLimit, upperLimit) / thresholdMutatableNeuronAmount;
+        const double threshholdResult = randomValueFromInterval(lowerThreshholdDeltaLimit, upperThreshholdDeltaLimit) /
+                                        mutatableNeuronAmount;
 
-        thresholdMutatableNeuronAmount--;
-        totalNeuronThresholdDelta -= result;
+        const double lowerSignalStrengthDeltaLimit = totalNeuronSignalStrengthDelta * (1 - deltaDistribution);
+        const double upperSignalStrengthDeltaLimit = totalNeuronSignalStrengthDelta * (1 + deltaDistribution);
 
-        (*neuronIt)->threshold += (chance(0.5)?-1:1)*result;    // 50% chance on subtraction / addition of result
+        const double signalStrengthResult = randomValueFromInterval(lowerSignalStrengthDeltaLimit,
+                                                                    upperSignalStrengthDeltaLimit) / mutatableNeuronAmount;
 
-        std::advance(neuronIt, 1);        // Equal to neuronIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
+        mutatableNeuronAmount--;
+        totalNeuronThresholdDelta -= threshholdResult;
+        totalNeuronSignalStrengthDelta -= signalStrengthResult;
+
+        (*neuronIt)->threshold += (chance(0.5) ? -1 : 1) * threshholdResult; // 50% chance on subtraction / addition of result
+        (*neuronIt)->signalStrength += (chance(0.5) ? -1 : 1) * signalStrengthResult;
+
+        std::advance(neuronIt, 1); // Equal to neuronIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
     }
-}
 
+    return &fitness;
+}
+/*
 Genome& Genome::operator=(Genome&& obj) {
     this->genes = std::move(obj.genes);
     this->neurons = std::move(obj.neurons);
@@ -125,7 +146,7 @@ Genome& Genome::operator=(const Genome& obj) {
     this->inputNeurons = obj.inputNeurons;
     this->outputNeurons = obj.outputNeurons;
     return *this;
-}
+}*/
 
 unsigned int Genome::getRandomGeneIndex() {
     return (unsigned int)(randomValueFromInterval(double(0.0), double(1.0))*genes.size());
@@ -171,4 +192,10 @@ std::list<Neuron *> Genome::getSendableNeurons() {
         std::advance(rcvIt, 1);
     }
     return resultContainer;
+}
+
+void Genome::clearNetworkData() {
+    for (Neuron neuron : inputNeurons) {
+        neuron.resetData();
+    }
 }
