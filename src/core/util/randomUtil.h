@@ -13,17 +13,14 @@ static std::random_device rnddev;
 // PARAMETER SYNTAX
 // AB.CDE%: percentage = 0.ABCDE
 
-template<typename T> //TODO: Add support for integral types with std::uniform_int_distribution<T>
-static T randomValueFromInterval (T lowerBound, T upperBound) {
-    if (std::is_floating_point<T>::value)
-    {
-        return std::uniform_real_distribution<T>(lowerBound, upperBound)(rnddev);
-    }
-    else
-    {
-        return std::uniform_int_distribution<T>(lowerBound, upperBound)(rnddev);
-    }
+static double randomValueFromInterval (double lowerBound, double upperBound) {
+    return std::uniform_real_distribution<double>(lowerBound, upperBound)(rnddev);
 }
+
+static int randomValueFromInterval (int lowerBound, int upperBound) {
+    return std::uniform_int_distribution<int>(lowerBound, upperBound)(rnddev);
+}
+
 
 static bool chance(double percentage) {
     double randomResult = randomValueFromInterval((double(0.0)), (double)1.0);
