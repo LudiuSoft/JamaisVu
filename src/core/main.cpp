@@ -23,6 +23,6 @@ int main()
     signal(SIGINT, end);
     std::cout << "\033[?25l" << std::endl;
     tui.drawFrames();
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+    randomValueFromInterval(1,2);
     end (0);
 }
