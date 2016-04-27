@@ -36,7 +36,7 @@ bool Neuron::disconnectGene(Gene* gene) {
 }
 
 Gene* Neuron::disconnectGene() {
-    unsigned int pointer = (unsigned int) (random0to1() * getGeneAmount());
+    unsigned int pointer = (unsigned int) (randomValueFromInterval(double(0.0), double(1.0)) * getGeneAmount());
     Gene *toReturn;
     if (pointer < inputGenes.size()) {
         toReturn = inputGenes.at(pointer);

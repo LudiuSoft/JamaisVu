@@ -63,10 +63,10 @@ void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
         // TODO: Check for already existing connection
         std::list<Neuron*> sendableNeurons = getSendableNeurons();
         auto sndIt = sendableNeurons.begin();
-        std::advance(sndIt, (unsigned int)(sendableNeurons.size()*random0to1()));
+        std::advance(sndIt, (unsigned int)(sendableNeurons.size()*randomValueFromInterval(double(0.0), double(1.0))));
 
         auto rcvIt = receivableNeurons.begin();
-        std::advance(rcvIt, (unsigned int)(receivableNeurons.size()*random0to1()));
+        std::advance(rcvIt, (unsigned int)(receivableNeurons.size()*randomValueFromInterval(double(0.0), double(1.0))));
 
         genes.push_back(Gene(**sndIt, **rcvIt));    // Sending neuron is the genes input, receiving neuron its output
     }
@@ -128,11 +128,11 @@ Genome& Genome::operator=(const Genome& obj) {
 }
 
 unsigned int Genome::getRandomGeneIndex() {
-    return (unsigned int)(random0to1()*genes.size());
+    return (unsigned int)(randomValueFromInterval(double(0.0), double(1.0))*genes.size());
 }
 
 unsigned int Genome::getRandomNeuronIndex() {
-    return (unsigned int)(random0to1()*neurons.size());
+    return (unsigned int)(randomValueFromInterval(double(0.0), double(1.0))*neurons.size());
 }
 
 std::list<Neuron *> Genome::getReceivableNeurons() {
