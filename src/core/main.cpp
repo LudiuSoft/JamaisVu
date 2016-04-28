@@ -1,16 +1,12 @@
 #include <iostream>
-#include <zconf.h>
 #include <mutex>
 
 #include "simulation/Simulation.h"
 #include "tui/Console.h"
 #include "tui/TUI.h"
-#include "util/randomUtil.h"
 #include "network/Generation.h"
 #include "util/toStr.h"
 #include <csignal>
-#include <chrono>
-#include <thread>
 
 TUI tui;
 
@@ -35,38 +31,38 @@ void runNetworkTest1() {
     const Delta<double> totalNeuronSignalStrengthDelta = 0.5;
 
     while (testGen.generation != 100) {
-        for (unsigned int a = 0; a < speciesPerGen; a++) {
-            for (unsigned int b = 0; b < genomesPerSpecies; b++) {
+        for (unsigned int i = 0; i < speciesPerGen; i++) {
+            for (unsigned int j = 0; j < genomesPerSpecies; j++) {
                 std::cout << "G" << toStr(testGen.generation);
-                std::cout << "S" << toStr(a+1);
-                std::cout << "G" << toStr(b+1) << ": \n";
+                std::cout << "S" << toStr(i+1);
+                std::cout << "G" << toStr(j+1) << ": \n";
 
-                auto it1 = testGen.species.begin();
-                std::advance(it1, a);
-                auto it2 = (*it1).genomes.begin();
-                std::advance(it2, b);
+                auto speciesIterator = testGen.species.begin();
+                std::advance(speciesIterator, i);
+                auto genomeIterator = (*speciesIterator).genomes.begin();
+                std::advance(genomeIterator, j);
                 // The lower the stronger
                 double hunger = 2.0;
                 // The lower the...less
                 double food = 1.0;
                 double foodFactor = 1.0;
                 int fitness = testGen.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta,
-                                              totalNeuronSignalStrengthDelta, a, b);
+                                              totalNeuronSignalStrengthDelta, i, j);
 
                 bool dead = false;
-                int round = 0;
+                int roundNumber = 0;
                 const int maxRounds = 1000000;
-                while (round<maxRounds && !dead) {
+                while (roundNumber < maxRounds && !dead) {
                     hunger -= 0.5;
                     food += 0.3 * foodFactor;
                     foodFactor *= 1.2;
 
-                    auto it3 = (*it2).inputNeurons.begin();
-                    it3->pulse(hunger);
-                    std::advance(it3, 1);
-                    it3->pulse(food);
+                    auto neuronIterator = (*genomeIterator).inputNeurons.begin();
+                    neuronIterator->pulse(hunger);
+                    std::advance(neuronIterator, 1);
+                    neuronIterator->pulse(food);
 
-                    double signal = (*it2).outputNeurons.begin()->getSendingSignalStrength();
+                    double signal = (*genomeIterator).outputNeurons.begin()->getSendingSignalStrength();
                     if (signal != 0.0) {
                         hunger += signal;
                         if (signal>food) signal = food;
@@ -75,11 +71,10 @@ void runNetworkTest1() {
                     }
 
                     if(hunger<0) dead = true;
-                    round++;
+                    roundNumber++;
                 }
-                fitness = round;
-                it2->fitness = round;
-                std::cout << toStr(fitness) << std::endl;
+                genomeIterator->fitness = roundNumber;
+                std::cout << toStr(genomeIterator->fitness) << std::endl;
             }
         }
         testGen.nextGen();

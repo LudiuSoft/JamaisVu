@@ -36,11 +36,9 @@ void Player::setExhaustion(Delta<double> deltaExhaustion) {
     if (exhaustion<0) {exhaustion = 0;}
 }
 
-
-
-void Player::forage(double findFoodProbability, double findWaterProbability) { //TODO: Make method capture args from the simulation the player is in
-    bool foundFood  = chance(findFoodProbability);
-    bool foundWater = chance(findWaterProbability);
+void Player::forage() {
+    bool foundFood  = chance(this->simulation.findFoodProbability);
+    bool foundWater = chance(this->simulation.findWaterProbability);
 
     if (foundFood) {this->foodCount++;}
     if (foundWater) {this->waterCount++;}
@@ -49,8 +47,6 @@ void Player::forage(double findFoodProbability, double findWaterProbability) { /
     this->setHunger(0.1);
     this->setExhaustion(0.05);
 }
-
-
 
 void Player::drink() {
     if (waterCount == 0) { std::cout << "No water left, can't drink!";}

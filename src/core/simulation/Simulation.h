@@ -10,10 +10,9 @@
 
 class Simulation {
 public:
-
-
     bool paused;
     bool isDay;
+    int round = 0;
     double findFoodProbability;
     double findWaterProbability;
     std::thread thread;
@@ -25,8 +24,7 @@ public:
     void resume();
     void endSimulationIfDead();
     void end();
-    static void loop();
-
+    static void threadCode(Simulation* simulation);
 };
 
 

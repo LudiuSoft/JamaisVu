@@ -10,18 +10,15 @@ Simulation::Simulation() : player(*this) {
 }
 
 void Simulation::start() {
-    this->thread = std::thread(Simulation::loop);
+    this->thread = std::thread(Simulation::threadCode, this);
 }
 
 void Simulation::end() {
     this->thread.join();
 }
 
-void Simulation::loop() {
-    while(true)
-    {
-        std::cout << "lol\n";
-    }
+void Simulation::threadCode(Simulation* simulation) {
+
 }
 
 

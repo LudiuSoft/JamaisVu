@@ -25,7 +25,7 @@ public:
 
     Player(Simulation& simulation);
     bool isAlive();
-    void forage(double findFoodProbability, double findWaterProbability); //TODO in src file Player.cpp
+    void forage();
     void drink();
     void setThirst (Delta<double> deltaThrist);
     void eat();
