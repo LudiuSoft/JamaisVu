@@ -21,7 +21,7 @@ Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecie
     }
 }
 
-int* Generation::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
+int Generation::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
                         Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta,
                         unsigned int indexSpecies, unsigned int indexGenomes) {
     auto it = species.begin();

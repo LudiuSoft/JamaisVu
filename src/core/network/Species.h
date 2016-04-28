@@ -27,10 +27,10 @@ public:
     std::list<Genome> getBestGenomes(unsigned int amount);
     std::list<Genome> getBestGenomes(double percentage);
 
-    int* evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
+    int evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
                 Delta<double> totalNeuronSignalStrengthDelta, unsigned int indexGenome);
 
-    double getAverageFitness();
+    long double getAverageFitness();
 
     void nextGen(double bestOfPercentage);     // This might sound confusing, but basically it's only the function that gets called when...well...it's ambigous imo.
 };

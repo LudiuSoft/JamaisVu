@@ -21,7 +21,7 @@ void end(int signum) {
 }
 
 void runNetworkTest1() {
-    std::list<Neuron> inputNeurons, outputNeurons = std::list<Neuron>();
+    std::list<Neuron> inputNeurons, outputNeurons;
     inputNeurons.push_back(Neuron());   // Hunger
     inputNeurons.push_back(Neuron());   // Food that's there
     outputNeurons.push_back(Neuron());  // How many percent to eat
@@ -50,12 +50,12 @@ void runNetworkTest1() {
                 // The lower the...less
                 double food = 1.0;
                 double foodFactor = 1.0;
-                int* fitness = testGen.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta,
+                int fitness = testGen.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta,
                                               totalNeuronSignalStrengthDelta, a, b);
 
                 bool dead = false;
                 int round = 0;
-                const int maxRounds = 150;
+                const int maxRounds = 1000000;
                 while (round<maxRounds && !dead) {
                     hunger -= 0.5;
                     food += 0.3 * foodFactor;
@@ -77,8 +77,9 @@ void runNetworkTest1() {
                     if(hunger<0) dead = true;
                     round++;
                 }
-                *fitness = round;
-                std::cout << toStr(*fitness) << std::endl;
+                fitness = round;
+                it2->fitness = round;
+                std::cout << toStr(fitness) << std::endl;
             }
         }
         testGen.nextGen();

@@ -2,6 +2,7 @@
 // Created by IPat (Local) on 01.04.2016.
 //
 
+#include <iostream>
 #include "Genome.h"
 
 Genome::Genome(const Genome &obj) {
@@ -30,7 +31,7 @@ Genome::Genome(std::list<Neuron> inputNeurons, std::list<Neuron> outputNeurons) 
 // to the amount of genes if there are many, making the more weight change possibilities (due to more genes and neurons)
 // ready for experiments.
 
-int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
+int Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
                     Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta) {
     const float deltaDistribution = 0.6;
 
@@ -44,17 +45,16 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
 
         std::advance(genesIterator, geneIndex);
 
-        genesIterator->destroy();
         genes.erase(genesIterator);
     }
 
-    if (chance(destroyNeuronProb)&&neurons.size()!=0) {
+    if (chance(destroyNeuronProb) && neurons.size()!=0) {
         unsigned int neuronIndex = getRandomNeuronIndex();
         auto neuronsIterator = neurons.begin();
 
+
         std::advance(neuronsIterator, neuronIndex);
 
-        neuronsIterator->destroy();
         neurons.erase(neuronsIterator);
     }
 
@@ -62,7 +62,7 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
     const double createNeuronProb = networkChangeFactor * 5 / 100;
     const double createGeneProb = networkChangeFactor * 25 / 100;
 
-    std::list<Neuron *> receivableNeurons = getReceivableNeurons();   // Reason for early declaration: Gets used multiple times
+    std::list<Neuron*> receivableNeurons = getReceivableNeurons();   // Reason for early declaration: Gets used multiple times
 
     if (chance(createGeneProb)) {                               // Gene gets created
         std::list<Neuron*> sendableNeurons = getSendableNeurons();
@@ -126,8 +126,7 @@ int* Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDel
 
         std::advance(neuronIt, 1); // Equal to neuronIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
     }
-
-    return &fitness;
+    return fitness;
 }
 /*
 Genome& Genome::operator=(Genome&& obj) {

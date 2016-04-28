@@ -2,6 +2,7 @@
 // Created by IPat (Local) on 28.03.2016.
 //
 
+#include <iostream>
 #include "Species.h"
 
 Species::Species(unsigned int limit, std::list<Neuron>& inputNeurons, std::list<Neuron>& outputNeurons)
@@ -25,7 +26,7 @@ void Species::setGenomeLimit(unsigned int limit)
     this->maxGenomes = limit;
 }
 
-int* Species::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
+int Species::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
                      Delta<double> totalNeuronSignalStrengthDelta, unsigned int indexGenome) {
     auto it = genomes.begin();
     std::advance(it, indexGenome);
@@ -45,15 +46,12 @@ std::list<Genome> Species::getBestGenomes(unsigned int amount)
     return genomesCopy;
 }
 
-double Species::getAverageFitness() {
-    int allFitness = 0;
-    int divisor = 0;
+long double Species::getAverageFitness() {
+    long totalFitness = 0;
     for (Genome genome : genomes) {
-        allFitness += genome.fitness;
-        divisor++;
+        totalFitness += genome.fitness;
     }
-    if (divisor==0) divisor++;
-    return allFitness / divisor;
+    return totalFitness / genomes.size();
 }
 
 // 0 < bestOfPercentage < 0.5
