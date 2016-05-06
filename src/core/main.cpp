@@ -7,6 +7,8 @@
 #include "network/Generation.h"
 #include "util/toStr.h"
 #include <csignal>
+#include <SDL.h>
+#include <SDL_image.h>
 
 TUI tui;
 
@@ -47,7 +49,7 @@ void runNetworkTest1() {
                 double food = 1.0;
                 double foodFactor = 1.0;
                 int fitness = testGen.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta,
-                                              totalNeuronSignalStrengthDelta, i, j);
+                                             totalNeuronSignalStrengthDelta, i, j);
 
                 bool dead = false;
                 int roundNumber = 0;
@@ -81,11 +83,31 @@ void runNetworkTest1() {
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+    SDL_Window* window = SDL_CreateWindow("Jamais Vu", 0, 0, 1080, 720, SDL_WINDOW_RESIZABLE);
+    SDL_Surface* windowSurface;
+    SDL_Event event;
     signal(SIGINT, end);
-    std::cout << "\033[?25l" << std::endl;
-    tui.drawFrames();
+    bool running = true;
+
+    while (running)
+    {
+        windowSurface = SDL_GetWindowSurface(window);
+        SDL_FillRect(windowSurface, NULL, SDL_MapRGB(windowSurface->format, 0x00, 0x00, 0x00));
+        SDL_UpdateWindowSurface(window);
+
+        while(SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+                case SDL_QUIT:
+                    SDL_DestroyWindow(window);
+                    running = false;
+                    break;
+            }
+        }
+    }
 
     std::cout << std::endl << "Starting networkTest1()..." << std::endl;
     runNetworkTest1();
