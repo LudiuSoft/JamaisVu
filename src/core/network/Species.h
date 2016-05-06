@@ -27,7 +27,7 @@ public:
     std::list<Genome> getBestGenomes(unsigned int amount);
     std::list<Genome> getBestGenomes(double percentage);
 
-    int evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
+    void evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
                 Delta<double> totalNeuronSignalStrengthDelta, unsigned int indexGenome);
 
     long double getAverageFitness();
