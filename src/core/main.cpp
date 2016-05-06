@@ -7,8 +7,9 @@
 #include "network/Generation.h"
 #include "util/toStr.h"
 #include <csignal>
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 TUI tui;
 
@@ -85,28 +86,24 @@ void runNetworkTest1() {
 
 int main(int argc, char *argv[])
 {
-    SDL_Window* window = SDL_CreateWindow("Jamais Vu", 0, 0, 1080, 720, SDL_WINDOW_RESIZABLE);
-    SDL_Surface* windowSurface;
-    SDL_Event event;
+    sf::RenderWindow window(sf::VideoMode(1080,720), "Jamais Vu");
+    sf::Event event;
     signal(SIGINT, end);
     bool running = true;
 
-    while (running)
+    while (window.isOpen())
     {
-        windowSurface = SDL_GetWindowSurface(window);
-        SDL_FillRect(windowSurface, NULL, SDL_MapRGB(windowSurface->format, 0x00, 0x00, 0x00));
-        SDL_UpdateWindowSurface(window);
 
-        while(SDL_PollEvent(&event))
+        while (window.pollEvent(event))
         {
             switch (event.type)
             {
-                case SDL_QUIT:
-                    SDL_DestroyWindow(window);
-                    running = false;
-                    break;
+                case sf::Event::Closed:
+                    window.close();
             }
         }
+        window.clear(sf::Color::Black);
+        window.display();
     }
 
     std::cout << std::endl << "Starting networkTest1()..." << std::endl;

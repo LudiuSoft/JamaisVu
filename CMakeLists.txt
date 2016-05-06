@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 project(JamaisVu)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fext-numeric-literals -Bstatic -pthread -static-libgcc -lSDL2")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fext-numeric-literals -Bstatic -pthread -static-libgcc -lsfml-system -lsfml-window")
 
 set(SOURCE_FILES src/core/main.cpp
                  src/core/network/Generation.cpp src/core/network/Generation.h
@@ -25,6 +25,6 @@ add_executable(JamaisVu ${SOURCE_FILES} src/core/util/randomUtil.h src/core/util
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
-find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIR})
-target_link_libraries(JamaisVu ${SDL2_LIBRARY})
+find_package(SFML 2 REQUIRED window system graphics audio)
+include_directories(${SFML_INCLUDE_DIR})
+target_link_libraries(JamaisVu ${SFML_LIBRARIES})

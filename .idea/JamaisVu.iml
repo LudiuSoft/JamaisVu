@@ -31,10 +31,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/Vector2.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/randomUtil.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/core/util/Delta.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cmake_modules/FindPackageMessage.cmake" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cmake_modules/FindSDL2.cmake" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cmake_modules/CMakeParseArguments.cmake" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cmake_modules/FindPackageHandleStandardArgs.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmake_modules/FindSFML.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
