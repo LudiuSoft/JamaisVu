@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 project(JamaisVu)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fext-numeric-literals -Bstatic -pthread -static-libgcc -lsfml-system -lsfml-window")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fext-numeric-literals -Bstatic -pthread -static-libgcc -Bdynamic -lsfml-system -lsfml-window")
 
 set(SOURCE_FILES src/core/main.cpp
                  src/core/network/Generation.cpp src/core/network/Generation.h

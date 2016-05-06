@@ -7,7 +7,6 @@
 #include "network/Generation.h"
 #include "util/toStr.h"
 #include <csignal>
-#include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -93,7 +92,6 @@ int main(int argc, char *argv[])
 
     while (window.isOpen())
     {
-
         while (window.pollEvent(event))
         {
             switch (event.type)
