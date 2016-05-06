@@ -22,7 +22,7 @@ public:
     std::list<Neuron> outputNeurons;
 
     int fitness = 0;
-    int mutate(double addRemoveMutation, Delta<double> geneWeightMutation, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta);
+    void mutate(double addRemoveMutation, Delta<double> geneWeightMutation, Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta);
 
     /*bool operator > (const Genome& g1) const { return (fitness > g1.fitness); }
     int operator- (const Genome& g1) const { return (fitness - g1.fitness); }

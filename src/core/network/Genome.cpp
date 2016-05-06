@@ -31,7 +31,7 @@ Genome::Genome(std::list<Neuron> inputNeurons, std::list<Neuron> outputNeurons) 
 // to the amount of genes if there are many, making the more weight change possibilities (due to more genes and neurons)
 // ready for experiments.
 
-int Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
+void Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
                     Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta) {
     const float deltaDistribution = 0.6;
 
@@ -126,7 +126,6 @@ int Genome::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelt
 
         std::advance(neuronIt, 1); // Equal to neuronIt++; Coding practice since iterators are not always optimized (Operator ++ not always overridden)
     }
-    return fitness;
 }
 /*
 Genome& Genome::operator=(Genome&& obj) {

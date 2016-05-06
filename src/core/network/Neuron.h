@@ -15,13 +15,13 @@ private:
     double data;    // Temporary for each "round" a genome has to live through
     bool cleared;
 
-    std::list<Gene*> inputGenes;
-    std::list<Gene*> outputGenes;
-
     bool deleteInputGene(Gene* gene);
     bool deleteOutputGene(Gene* gene);
 public:
     void resetData();
+
+    std::list<Gene*> inputGenes;
+    std::list<Gene*> outputGenes;
 
     /*
      * HOW TO PROPERLY USE THE NEURON CLASS FOR INPUT OR OUTPUT:

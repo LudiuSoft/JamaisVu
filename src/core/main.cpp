@@ -49,7 +49,7 @@ void runNetworkTest1() {
                 // The lower the...less
                 double food = 1.0;
                 double foodFactor = 1.0;
-                int fitness = testGen.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta,
+                testGen.mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta,
                                              totalNeuronSignalStrengthDelta, i, j);
 
                 bool dead = false;

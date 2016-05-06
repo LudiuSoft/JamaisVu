@@ -27,7 +27,7 @@ public:
     std::list<Neuron> getInputNeurons();
     std::list<Neuron> getOutputNeurons();
 
-    int mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
+    void mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
                Delta<double> totalNeuronSignalStrengthDelta, unsigned int indexSpecies, unsigned int indexGenomes);
 
     void nextGen();

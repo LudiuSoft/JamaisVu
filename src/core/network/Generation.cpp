@@ -21,12 +21,12 @@ Generation::Generation(unsigned int speciesPerGen, unsigned int genomesPerSpecie
     }
 }
 
-int Generation::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
+void Generation::mutate(double networkChangeFactor, Delta<double> totalGeneWeightDelta,
                         Delta<double> totalNeuronThresholdDelta, Delta<double> totalNeuronSignalStrengthDelta,
                         unsigned int indexSpecies, unsigned int indexGenomes) {
     auto it = species.begin();
     std::advance(it, indexSpecies);
-    return (*it).evolve(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta, indexGenomes);
+    (*it).evolve(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta, indexGenomes);
 }
 
 void Generation::setInputNeurons(std::list<Neuron> &input) {

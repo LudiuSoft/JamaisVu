@@ -26,11 +26,11 @@ void Species::setGenomeLimit(unsigned int limit)
     this->maxGenomes = limit;
 }
 
-int Species::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
+void Species::evolve(double networkChangeFactor, Delta<double> totalGeneWeightDelta, Delta<double> totalNeuronThresholdDelta,
                      Delta<double> totalNeuronSignalStrengthDelta, unsigned int indexGenome) {
     auto it = genomes.begin();
     std::advance(it, indexGenome);
-    return (*it).mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta);
+    (*it).mutate(networkChangeFactor, totalGeneWeightDelta, totalNeuronThresholdDelta, totalNeuronSignalStrengthDelta);
 }
 
 std::list<Genome> Species::getBestGenomes(double percentage)
